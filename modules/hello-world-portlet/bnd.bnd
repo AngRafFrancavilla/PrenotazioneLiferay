@@ -1,0 +1,5 @@
+Bundle-Name: Hello World Portlet
+Bundle-SymbolicName: com.example.portlet
+Bundle-Version: 1.0.0
+Export-Package: com.example.constants
+Web-ContextPath: /hello-world

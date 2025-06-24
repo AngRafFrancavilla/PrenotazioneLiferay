@@ -1,0 +1,6 @@
+Bundle-Name: restclient
+Bundle-SymbolicName: com.example.restclient
+Bundle-Version: 1.0.0
+
+Export-Package: \
+	com.example.rest

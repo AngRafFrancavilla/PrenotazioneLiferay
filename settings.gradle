@@ -1,0 +1,19 @@
+buildscript {
+    dependencies {
+        classpath group: "com.liferay", name: "com.liferay.gradle.plugins.workspace", version: "12.1.11"
+    }
+
+    repositories {
+        mavenLocal()
+        maven {
+            url "https://repository-cdn.liferay.com/nexus/content/groups/public"
+        }
+    }
+}
+
+apply plugin: "com.liferay.workspace"
+
+include ":modules:hello-world-portlet"
+include ":modules:prenotazione-service:prenotazione-service-api"
+include ":modules:prenotazione-service:prenotazione-service-service"
+include ":modules:restclient"

@@ -1,0 +1,10 @@
+Bundle-Name: prenotazione-api
+Bundle-SymbolicName: prenotazione.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	prenotazione.exception,\
+	prenotazione.model,\
+	prenotazione.service,\
+	prenotazione.service.persistence
+-check: EXPORTS
+-includeresource: META-INF/service.xml=../prenotazione-service/service.xml

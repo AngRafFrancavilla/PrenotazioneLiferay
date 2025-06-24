@@ -1,0 +1,11 @@
+dependencies {
+	api project(":modules:prenotazione:prenotazione-api")
+	compileOnly group: "com.liferay.portal", name: "release.portal.api"
+}
+
+buildService {
+	apiDir = "../prenotazione-api/src/main/java"
+	testDir = "../prenotazione-test/src/testIntegration/java"
+}
+
+group = "prenotazione"

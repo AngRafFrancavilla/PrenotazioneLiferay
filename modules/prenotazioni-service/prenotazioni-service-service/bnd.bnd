@@ -1,0 +1,3 @@
+Bundle-Name: Prenotazioni Service Implementation
+Bundle-SymbolicName: com.example.service.service
+Bundle-Version: 1.0.0

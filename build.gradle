@@ -1,0 +1,6 @@
+// Check GETTING_STARTED.markdown for information regarding usage.
+subprojects {  subproject ->
+    tasks.withType(Jar) {
+        destinationDirectory = file("$rootDir/build/")
+    }
+}
