@@ -9,9 +9,12 @@ import com.liferay.portal.kernel.dao.jdbc.DataSourceProvider;
 import com.liferay.portal.util.PropsUtil;
 
 @Component(
-	    immediate = true,
-	    service = DataSourceProvider.class
-	)
+    immediate = true,
+    service = DataSourceProvider.class,
+    		property = {
+    		        "data.source.name=prenotazioniDataSource"
+    		    }
+)
 public class DataSourceProviderImpl implements DataSourceProvider {
 	 
 	@Override
@@ -20,7 +23,7 @@ public class DataSourceProviderImpl implements DataSourceProvider {
 		DataSource dataSource = null;
  
 		try {
- 
+			
 			dataSource = DataSourceFactoryUtil.initDataSource(PropsUtil.getProperties("jdbc.prenotazioni.jndi.name", true));
 		}
 		catch (Exception e) {
