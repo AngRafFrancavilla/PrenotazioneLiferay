@@ -2,7 +2,6 @@
 
 <model-hints>
 	<model name="prenotazione.model.Prenotazione">
-		<field name="uuid" type="String" />
 		<field name="prenotazioneId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
@@ -15,5 +14,13 @@
 		<field name="oraInizio" type="String" />
 		<field name="oraFine" type="String" />
 		<field name="postazioneId" type="String" />
+	</model>
+	<model name="prenotazioni.model.Prenotazione">
+		<field name="id" type="long" />
+		<field name="data" type="Date" />
+		<field name="oraInizio" type="Date" />
+		<field name="oraFine" type="Date" />
+		<field name="utentiId" type="long" />
+		<field name="postazioneId" type="long" />
 	</model>
 </model-hints>

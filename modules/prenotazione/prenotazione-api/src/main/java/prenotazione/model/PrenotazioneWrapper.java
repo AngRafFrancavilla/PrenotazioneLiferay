@@ -5,7 +5,6 @@
 
 package prenotazione.model;
 
-import com.liferay.exportimport.kernel.lar.StagedModelType;
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.model.wrapper.BaseModelWrapper;
 
@@ -34,7 +33,6 @@ public class PrenotazioneWrapper
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
-		attributes.put("uuid", getUuid());
 		attributes.put("prenotazioneId", getPrenotazioneId());
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
@@ -53,12 +51,6 @@ public class PrenotazioneWrapper
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
-		String uuid = (String)attributes.get("uuid");
-
-		if (uuid != null) {
-			setUuid(uuid);
-		}
-
 		Long prenotazioneId = (Long)attributes.get("prenotazioneId");
 
 		if (prenotazioneId != null) {
@@ -277,16 +269,6 @@ public class PrenotazioneWrapper
 		return model.getUserUuid();
 	}
 
-	/**
-	 * Returns the uuid of this prenotazione.
-	 *
-	 * @return the uuid of this prenotazione
-	 */
-	@Override
-	public String getUuid() {
-		return model.getUuid();
-	}
-
 	@Override
 	public void persist() {
 		model.persist();
@@ -432,24 +414,9 @@ public class PrenotazioneWrapper
 		model.setUserUuid(userUuid);
 	}
 
-	/**
-	 * Sets the uuid of this prenotazione.
-	 *
-	 * @param uuid the uuid of this prenotazione
-	 */
-	@Override
-	public void setUuid(String uuid) {
-		model.setUuid(uuid);
-	}
-
 	@Override
 	public String toXmlString() {
 		return model.toXmlString();
-	}
-
-	@Override
-	public StagedModelType getStagedModelType() {
-		return model.getStagedModelType();
 	}
 
 	@Override

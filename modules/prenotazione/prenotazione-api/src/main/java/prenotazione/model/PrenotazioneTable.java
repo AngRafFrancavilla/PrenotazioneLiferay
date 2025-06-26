@@ -23,8 +23,6 @@ public class PrenotazioneTable extends BaseTable<PrenotazioneTable> {
 
 	public static final PrenotazioneTable INSTANCE = new PrenotazioneTable();
 
-	public final Column<PrenotazioneTable, String> uuid = createColumn(
-		"uuid_", String.class, Types.VARCHAR, Column.FLAG_DEFAULT);
 	public final Column<PrenotazioneTable, Long> prenotazioneId = createColumn(
 		"prenotazioneId", Long.class, Types.BIGINT, Column.FLAG_PRIMARY);
 	public final Column<PrenotazioneTable, Long> groupId = createColumn(

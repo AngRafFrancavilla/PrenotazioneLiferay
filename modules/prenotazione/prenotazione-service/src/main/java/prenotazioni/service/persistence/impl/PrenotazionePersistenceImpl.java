@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later OR LicenseRef-Liferay-DXP-EULA-2.0.0-2023-06
  */
 
-package prenotazione.service.persistence.impl;
+package prenotazioni.service.persistence.impl;
 
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.configuration.Configuration;
@@ -16,22 +16,15 @@ import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.SessionFactory;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
-import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
 import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
-import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.SetUtil;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,16 +37,16 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
 import org.osgi.service.component.annotations.Reference;
 
-import prenotazione.exception.NoSuchPrenotazioneException;
+import prenotazioni.exception.NoSuchPrenotazioneException;
 
-import prenotazione.model.Prenotazione;
-import prenotazione.model.PrenotazioneTable;
-import prenotazione.model.impl.PrenotazioneImpl;
-import prenotazione.model.impl.PrenotazioneModelImpl;
+import prenotazioni.model.Prenotazione;
+import prenotazioni.model.PrenotazioneTable;
+import prenotazioni.model.impl.PrenotazioneImpl;
+import prenotazioni.model.impl.PrenotazioneModelImpl;
 
-import prenotazione.service.persistence.PrenotazionePersistence;
-import prenotazione.service.persistence.PrenotazioneUtil;
-import prenotazione.service.persistence.impl.constants.PersistenceConstants;
+import prenotazioni.service.persistence.PrenotazionePersistence;
+import prenotazioni.service.persistence.PrenotazioneUtil;
+import prenotazioni.service.persistence.impl.constants.PersistenceConstants;
 
 /**
  * The persistence implementation for the prenotazione service.
@@ -91,7 +84,12 @@ public class PrenotazionePersistenceImpl
 	public PrenotazionePersistenceImpl() {
 		Map<String, String> dbColumnNames = new HashMap<String, String>();
 
+		dbColumnNames.put("id", "id_");
 		dbColumnNames.put("data", "data_");
+		dbColumnNames.put("oraInizio", "ora_inizio");
+		dbColumnNames.put("oraFine", "ora_fine");
+		dbColumnNames.put("utentiId", "utenti_id");
+		dbColumnNames.put("postazioneId", "postazione_id");
 
 		setDBColumnNames(dbColumnNames);
 
@@ -185,17 +183,15 @@ public class PrenotazionePersistenceImpl
 	/**
 	 * Creates a new prenotazione with the primary key. Does not add the prenotazione to the database.
 	 *
-	 * @param prenotazioneId the primary key for the new prenotazione
+	 * @param id the primary key for the new prenotazione
 	 * @return the new prenotazione
 	 */
 	@Override
-	public Prenotazione create(long prenotazioneId) {
+	public Prenotazione create(long id) {
 		Prenotazione prenotazione = new PrenotazioneImpl();
 
 		prenotazione.setNew(true);
-		prenotazione.setPrimaryKey(prenotazioneId);
-
-		prenotazione.setCompanyId(CompanyThreadLocal.getCompanyId());
+		prenotazione.setPrimaryKey(id);
 
 		return prenotazione;
 	}
@@ -203,15 +199,13 @@ public class PrenotazionePersistenceImpl
 	/**
 	 * Removes the prenotazione with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param prenotazioneId the primary key of the prenotazione
+	 * @param id the primary key of the prenotazione
 	 * @return the prenotazione that was removed
 	 * @throws NoSuchPrenotazioneException if a prenotazione with the primary key could not be found
 	 */
 	@Override
-	public Prenotazione remove(long prenotazioneId)
-		throws NoSuchPrenotazioneException {
-
-		return remove((Serializable)prenotazioneId);
+	public Prenotazione remove(long id) throws NoSuchPrenotazioneException {
+		return remove((Serializable)id);
 	}
 
 	/**
@@ -289,50 +283,6 @@ public class PrenotazionePersistenceImpl
 	public Prenotazione updateImpl(Prenotazione prenotazione) {
 		boolean isNew = prenotazione.isNew();
 
-		if (!(prenotazione instanceof PrenotazioneModelImpl)) {
-			InvocationHandler invocationHandler = null;
-
-			if (ProxyUtil.isProxyClass(prenotazione.getClass())) {
-				invocationHandler = ProxyUtil.getInvocationHandler(
-					prenotazione);
-
-				throw new IllegalArgumentException(
-					"Implement ModelWrapper in prenotazione proxy " +
-						invocationHandler.getClass());
-			}
-
-			throw new IllegalArgumentException(
-				"Implement ModelWrapper in custom Prenotazione implementation " +
-					prenotazione.getClass());
-		}
-
-		PrenotazioneModelImpl prenotazioneModelImpl =
-			(PrenotazioneModelImpl)prenotazione;
-
-		ServiceContext serviceContext =
-			ServiceContextThreadLocal.getServiceContext();
-
-		Date date = new Date();
-
-		if (isNew && (prenotazione.getCreateDate() == null)) {
-			if (serviceContext == null) {
-				prenotazione.setCreateDate(date);
-			}
-			else {
-				prenotazione.setCreateDate(serviceContext.getCreateDate(date));
-			}
-		}
-
-		if (!prenotazioneModelImpl.hasSetModifiedDate()) {
-			if (serviceContext == null) {
-				prenotazione.setModifiedDate(date);
-			}
-			else {
-				prenotazione.setModifiedDate(
-					serviceContext.getModifiedDate(date));
-			}
-		}
-
 		Session session = null;
 
 		try {
@@ -392,26 +342,26 @@ public class PrenotazionePersistenceImpl
 	/**
 	 * Returns the prenotazione with the primary key or throws a <code>NoSuchPrenotazioneException</code> if it could not be found.
 	 *
-	 * @param prenotazioneId the primary key of the prenotazione
+	 * @param id the primary key of the prenotazione
 	 * @return the prenotazione
 	 * @throws NoSuchPrenotazioneException if a prenotazione with the primary key could not be found
 	 */
 	@Override
-	public Prenotazione findByPrimaryKey(long prenotazioneId)
+	public Prenotazione findByPrimaryKey(long id)
 		throws NoSuchPrenotazioneException {
 
-		return findByPrimaryKey((Serializable)prenotazioneId);
+		return findByPrimaryKey((Serializable)id);
 	}
 
 	/**
 	 * Returns the prenotazione with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param prenotazioneId the primary key of the prenotazione
+	 * @param id the primary key of the prenotazione
 	 * @return the prenotazione, or <code>null</code> if a prenotazione with the primary key could not be found
 	 */
 	@Override
-	public Prenotazione fetchByPrimaryKey(long prenotazioneId) {
-		return fetchByPrimaryKey((Serializable)prenotazioneId);
+	public Prenotazione fetchByPrimaryKey(long id) {
+		return fetchByPrimaryKey((Serializable)id);
 	}
 
 	/**
@@ -605,7 +555,7 @@ public class PrenotazionePersistenceImpl
 
 	@Override
 	protected String getPKDBName() {
-		return "prenotazioneId";
+		return "id_";
 	}
 
 	@Override
@@ -694,7 +644,9 @@ public class PrenotazionePersistenceImpl
 		PrenotazionePersistenceImpl.class);
 
 	private static final Set<String> _badColumnNames = SetUtil.fromArray(
-		new String[] {"data"});
+		new String[] {
+			"id", "data", "oraInizio", "oraFine", "utentiId", "postazioneId"
+		});
 
 	@Override
 	protected FinderCache getFinderCache() {

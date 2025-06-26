@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later OR LicenseRef-Liferay-DXP-EULA-2.0.0-2023-06
  */
 
-package prenotazione.service;
+package prenotazioni.service;
 
 import com.liferay.petra.sql.dsl.query.DSLQuery;
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
@@ -17,7 +17,6 @@ import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.service.BaseLocalService;
 import com.liferay.portal.kernel.service.PersistedModelLocalService;
-import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
@@ -25,12 +24,11 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 
 import java.io.Serializable;
 
-import java.util.Date;
 import java.util.List;
 
 import org.osgi.annotation.versioning.ProviderType;
 
-import prenotazione.model.Prenotazione;
+import prenotazioni.model.Prenotazione;
 
 /**
  * Provides the local service interface for Prenotazione. Methods of this
@@ -53,7 +51,7 @@ public interface PrenotazioneLocalService
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add custom service methods to <code>prenotazione.service.impl.PrenotazioneLocalServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface. Consume the prenotazione local service via injection or a <code>org.osgi.util.tracker.ServiceTracker</code>. Use {@link PrenotazioneLocalServiceUtil} if injection and service tracking are not available.
+	 * Never modify this interface directly. Add custom service methods to <code>prenotazioni.service.impl.PrenotazioneLocalServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface. Consume the prenotazione local service via injection or a <code>org.osgi.util.tracker.ServiceTracker</code>. Use {@link PrenotazioneLocalServiceUtil} if injection and service tracking are not available.
 	 */
 
 	/**
@@ -69,11 +67,6 @@ public interface PrenotazioneLocalService
 	@Indexable(type = IndexableType.REINDEX)
 	public Prenotazione addPrenotazione(Prenotazione prenotazione);
 
-	public Prenotazione aggiungiPrenotazione(
-			long userId, String email, Date data, String oraInizio,
-			String oraFine, String postazioneId, ServiceContext serviceContext)
-		throws PortalException;
-
 	/**
 	 * @throws PortalException
 	 */
@@ -83,11 +76,11 @@ public interface PrenotazioneLocalService
 	/**
 	 * Creates a new prenotazione with the primary key. Does not add the prenotazione to the database.
 	 *
-	 * @param prenotazioneId the primary key for the new prenotazione
+	 * @param id the primary key for the new prenotazione
 	 * @return the new prenotazione
 	 */
 	@Transactional(enabled = false)
-	public Prenotazione createPrenotazione(long prenotazioneId);
+	public Prenotazione createPrenotazione(long id);
 
 	/**
 	 * @throws PortalException
@@ -103,13 +96,12 @@ public interface PrenotazioneLocalService
 	 * <strong>Important:</strong> Inspect PrenotazioneLocalServiceImpl for overloaded versions of the method. If provided, use these entry points to the API, as the implementation logic may require the additional parameters defined there.
 	 * </p>
 	 *
-	 * @param prenotazioneId the primary key of the prenotazione
+	 * @param id the primary key of the prenotazione
 	 * @return the prenotazione that was removed
 	 * @throws PortalException if a prenotazione with the primary key could not be found
 	 */
 	@Indexable(type = IndexableType.DELETE)
-	public Prenotazione deletePrenotazione(long prenotazioneId)
-		throws PortalException;
+	public Prenotazione deletePrenotazione(long id) throws PortalException;
 
 	/**
 	 * Deletes the prenotazione from the database. Also notifies the appropriate model listeners.
@@ -146,7 +138,7 @@ public interface PrenotazioneLocalService
 	 * Performs a dynamic query on the database and returns a range of the matching rows.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>prenotazione.model.impl.PrenotazioneModelImpl</code>.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>prenotazioni.model.impl.PrenotazioneModelImpl</code>.
 	 * </p>
 	 *
 	 * @param dynamicQuery the dynamic query
@@ -162,7 +154,7 @@ public interface PrenotazioneLocalService
 	 * Performs a dynamic query on the database and returns an ordered range of the matching rows.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>prenotazione.model.impl.PrenotazioneModelImpl</code>.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>prenotazioni.model.impl.PrenotazioneModelImpl</code>.
 	 * </p>
 	 *
 	 * @param dynamicQuery the dynamic query
@@ -197,7 +189,7 @@ public interface PrenotazioneLocalService
 		DynamicQuery dynamicQuery, Projection projection);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public Prenotazione fetchPrenotazione(long prenotazioneId);
+	public Prenotazione fetchPrenotazione(long id);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();
@@ -223,19 +215,18 @@ public interface PrenotazioneLocalService
 	/**
 	 * Returns the prenotazione with the primary key.
 	 *
-	 * @param prenotazioneId the primary key of the prenotazione
+	 * @param id the primary key of the prenotazione
 	 * @return the prenotazione
 	 * @throws PortalException if a prenotazione with the primary key could not be found
 	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public Prenotazione getPrenotazione(long prenotazioneId)
-		throws PortalException;
+	public Prenotazione getPrenotazione(long id) throws PortalException;
 
 	/**
 	 * Returns a range of all the prenotaziones.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>prenotazione.model.impl.PrenotazioneModelImpl</code>.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>prenotazioni.model.impl.PrenotazioneModelImpl</code>.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of prenotaziones

@@ -3,15 +3,15 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later OR LicenseRef-Liferay-DXP-EULA-2.0.0-2023-06
  */
 
-package prenotazione.service.persistence;
+package prenotazioni.service.persistence;
 
 import com.liferay.portal.kernel.service.persistence.BasePersistence;
 
 import org.osgi.annotation.versioning.ProviderType;
 
-import prenotazione.exception.NoSuchPrenotazioneException;
+import prenotazioni.exception.NoSuchPrenotazioneException;
 
-import prenotazione.model.Prenotazione;
+import prenotazioni.model.Prenotazione;
 
 /**
  * The persistence interface for the prenotazione service.
@@ -50,40 +50,39 @@ public interface PrenotazionePersistence extends BasePersistence<Prenotazione> {
 	/**
 	 * Creates a new prenotazione with the primary key. Does not add the prenotazione to the database.
 	 *
-	 * @param prenotazioneId the primary key for the new prenotazione
+	 * @param id the primary key for the new prenotazione
 	 * @return the new prenotazione
 	 */
-	public Prenotazione create(long prenotazioneId);
+	public Prenotazione create(long id);
 
 	/**
 	 * Removes the prenotazione with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param prenotazioneId the primary key of the prenotazione
+	 * @param id the primary key of the prenotazione
 	 * @return the prenotazione that was removed
 	 * @throws NoSuchPrenotazioneException if a prenotazione with the primary key could not be found
 	 */
-	public Prenotazione remove(long prenotazioneId)
-		throws NoSuchPrenotazioneException;
+	public Prenotazione remove(long id) throws NoSuchPrenotazioneException;
 
 	public Prenotazione updateImpl(Prenotazione prenotazione);
 
 	/**
 	 * Returns the prenotazione with the primary key or throws a <code>NoSuchPrenotazioneException</code> if it could not be found.
 	 *
-	 * @param prenotazioneId the primary key of the prenotazione
+	 * @param id the primary key of the prenotazione
 	 * @return the prenotazione
 	 * @throws NoSuchPrenotazioneException if a prenotazione with the primary key could not be found
 	 */
-	public Prenotazione findByPrimaryKey(long prenotazioneId)
+	public Prenotazione findByPrimaryKey(long id)
 		throws NoSuchPrenotazioneException;
 
 	/**
 	 * Returns the prenotazione with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param prenotazioneId the primary key of the prenotazione
+	 * @param id the primary key of the prenotazione
 	 * @return the prenotazione, or <code>null</code> if a prenotazione with the primary key could not be found
 	 */
-	public Prenotazione fetchByPrimaryKey(long prenotazioneId);
+	public Prenotazione fetchByPrimaryKey(long id);
 
 	/**
 	 * Returns all the prenotaziones.

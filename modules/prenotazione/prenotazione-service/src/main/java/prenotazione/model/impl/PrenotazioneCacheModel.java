@@ -54,11 +54,9 @@ public class PrenotazioneCacheModel
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(27);
+		StringBundler sb = new StringBundler(25);
 
-		sb.append("{uuid=");
-		sb.append(uuid);
-		sb.append(", prenotazioneId=");
+		sb.append("{prenotazioneId=");
 		sb.append(prenotazioneId);
 		sb.append(", groupId=");
 		sb.append(groupId);
@@ -90,13 +88,6 @@ public class PrenotazioneCacheModel
 	@Override
 	public Prenotazione toEntityModel() {
 		PrenotazioneImpl prenotazioneImpl = new PrenotazioneImpl();
-
-		if (uuid == null) {
-			prenotazioneImpl.setUuid("");
-		}
-		else {
-			prenotazioneImpl.setUuid(uuid);
-		}
 
 		prenotazioneImpl.setPrenotazioneId(prenotazioneId);
 		prenotazioneImpl.setGroupId(groupId);
@@ -166,8 +157,6 @@ public class PrenotazioneCacheModel
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
-		uuid = objectInput.readUTF();
-
 		prenotazioneId = objectInput.readLong();
 
 		groupId = objectInput.readLong();
@@ -187,13 +176,6 @@ public class PrenotazioneCacheModel
 
 	@Override
 	public void writeExternal(ObjectOutput objectOutput) throws IOException {
-		if (uuid == null) {
-			objectOutput.writeUTF("");
-		}
-		else {
-			objectOutput.writeUTF(uuid);
-		}
-
 		objectOutput.writeLong(prenotazioneId);
 
 		objectOutput.writeLong(groupId);
@@ -243,7 +225,6 @@ public class PrenotazioneCacheModel
 		}
 	}
 
-	public String uuid;
 	public long prenotazioneId;
 	public long groupId;
 	public long companyId;

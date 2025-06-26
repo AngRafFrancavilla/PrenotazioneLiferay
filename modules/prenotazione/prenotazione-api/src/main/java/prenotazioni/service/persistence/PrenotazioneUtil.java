@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later OR LicenseRef-Liferay-DXP-EULA-2.0.0-2023-06
  */
 
-package prenotazione.service.persistence;
+package prenotazioni.service.persistence;
 
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -15,10 +15,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import prenotazione.model.Prenotazione;
+import prenotazioni.model.Prenotazione;
 
 /**
- * The persistence utility for the prenotazione service. This utility wraps <code>prenotazione.service.persistence.impl.PrenotazionePersistenceImpl</code> and provides direct access to the database for CRUD operations. This utility should only be used by the service layer, as it must operate within a transaction. Never access this utility in a JSP, controller, model, or other front-end class.
+ * The persistence utility for the prenotazione service. This utility wraps <code>prenotazioni.service.persistence.impl.PrenotazionePersistenceImpl</code> and provides direct access to the database for CRUD operations. This utility should only be used by the service layer, as it must operate within a transaction. Never access this utility in a JSP, controller, model, or other front-end class.
  *
  * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
@@ -132,24 +132,24 @@ public class PrenotazioneUtil {
 	/**
 	 * Creates a new prenotazione with the primary key. Does not add the prenotazione to the database.
 	 *
-	 * @param prenotazioneId the primary key for the new prenotazione
+	 * @param id the primary key for the new prenotazione
 	 * @return the new prenotazione
 	 */
-	public static Prenotazione create(long prenotazioneId) {
-		return getPersistence().create(prenotazioneId);
+	public static Prenotazione create(long id) {
+		return getPersistence().create(id);
 	}
 
 	/**
 	 * Removes the prenotazione with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param prenotazioneId the primary key of the prenotazione
+	 * @param id the primary key of the prenotazione
 	 * @return the prenotazione that was removed
 	 * @throws NoSuchPrenotazioneException if a prenotazione with the primary key could not be found
 	 */
-	public static Prenotazione remove(long prenotazioneId)
-		throws prenotazione.exception.NoSuchPrenotazioneException {
+	public static Prenotazione remove(long id)
+		throws prenotazioni.exception.NoSuchPrenotazioneException {
 
-		return getPersistence().remove(prenotazioneId);
+		return getPersistence().remove(id);
 	}
 
 	public static Prenotazione updateImpl(Prenotazione prenotazione) {
@@ -159,24 +159,24 @@ public class PrenotazioneUtil {
 	/**
 	 * Returns the prenotazione with the primary key or throws a <code>NoSuchPrenotazioneException</code> if it could not be found.
 	 *
-	 * @param prenotazioneId the primary key of the prenotazione
+	 * @param id the primary key of the prenotazione
 	 * @return the prenotazione
 	 * @throws NoSuchPrenotazioneException if a prenotazione with the primary key could not be found
 	 */
-	public static Prenotazione findByPrimaryKey(long prenotazioneId)
-		throws prenotazione.exception.NoSuchPrenotazioneException {
+	public static Prenotazione findByPrimaryKey(long id)
+		throws prenotazioni.exception.NoSuchPrenotazioneException {
 
-		return getPersistence().findByPrimaryKey(prenotazioneId);
+		return getPersistence().findByPrimaryKey(id);
 	}
 
 	/**
 	 * Returns the prenotazione with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param prenotazioneId the primary key of the prenotazione
+	 * @param id the primary key of the prenotazione
 	 * @return the prenotazione, or <code>null</code> if a prenotazione with the primary key could not be found
 	 */
-	public static Prenotazione fetchByPrimaryKey(long prenotazioneId) {
-		return getPersistence().fetchByPrimaryKey(prenotazioneId);
+	public static Prenotazione fetchByPrimaryKey(long id) {
+		return getPersistence().fetchByPrimaryKey(id);
 	}
 
 	/**

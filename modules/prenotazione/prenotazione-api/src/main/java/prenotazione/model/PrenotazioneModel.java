@@ -9,7 +9,6 @@ import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.model.BaseModel;
 import com.liferay.portal.kernel.model.GroupedModel;
 import com.liferay.portal.kernel.model.ShardedModel;
-import com.liferay.portal.kernel.model.StagedAuditedModel;
 
 import java.util.Date;
 
@@ -28,8 +27,7 @@ import org.osgi.annotation.versioning.ProviderType;
  */
 @ProviderType
 public interface PrenotazioneModel
-	extends BaseModel<Prenotazione>, GroupedModel, ShardedModel,
-			StagedAuditedModel {
+	extends BaseModel<Prenotazione>, GroupedModel, ShardedModel {
 
 	/*
 	 * NOTE FOR DEVELOPERS:
@@ -50,23 +48,6 @@ public interface PrenotazioneModel
 	 * @param primaryKey the primary key of this prenotazione
 	 */
 	public void setPrimaryKey(long primaryKey);
-
-	/**
-	 * Returns the uuid of this prenotazione.
-	 *
-	 * @return the uuid of this prenotazione
-	 */
-	@AutoEscape
-	@Override
-	public String getUuid();
-
-	/**
-	 * Sets the uuid of this prenotazione.
-	 *
-	 * @param uuid the uuid of this prenotazione
-	 */
-	@Override
-	public void setUuid(String uuid);
 
 	/**
 	 * Returns the prenotazione ID of this prenotazione.

@@ -1,30 +1,30 @@
 <?xml version="1.0"?>
 <!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.4.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_4_0.dtd">
 
-<service-builder package-path="prenotazione" dependency-injector="ds" auto-namespace-tables="false">
+<service-builder package-path="prenotazioni" dependency-injector="ds" auto-namespace-tables="false">
+    
     <namespace></namespace>
 
-    <entity local-service="true" 
-    		name="Prenotazione"
-    		remote-service="true"
-    		uuid="false"
-    		data-source="prenotazioniDataSource" >
-    		
-        <column name="prenotazioneId" primary="true" type="long" />
+    <entity 
+        name="Prenotazione"
+        local-service="true"
+        remote-service="true"
+        uuid="false"
+        table="prenotazioni"
+        data-source="prenotazioniDataSource"
+        tx-manager="prenotazioniTransactionManager">
 
-        <!-- Group and Audit -->
-        <column name="groupId" type="long" />
-        <column name="companyId" type="long" />
-        <column name="userId" type="long" />
-        <column name="userName" type="String" />
-        <column name="createDate" type="Date" />
-        <column name="modifiedDate" type="Date" />
+        <!-- Chiave primaria -->
+        <column name="id" primary="true" type="long" />
 
         <!-- Campi prenotazione -->
-        <column name="email" type="String" />
         <column name="data" type="Date" />
-        <column name="oraInizio" type="String" />
-        <column name="oraFine" type="String" />
-        <column name="postazioneId" type="String" />
+        <column name="oraInizio" db-name="ora_inizio" type="Date" />
+        <column name="oraFine" db-name="ora_fine" type="Date" />
+
+        <!-- Foreign Keys -->
+        <column name="utentiId" db-name="utenti_id" type="long" />
+        <column name="postazioneId" db-name="postazione_id" type="long" />
+        
     </entity>
 </service-builder>

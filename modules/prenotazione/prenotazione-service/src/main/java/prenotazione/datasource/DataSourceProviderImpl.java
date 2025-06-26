@@ -24,7 +24,7 @@ public class DataSourceProviderImpl implements DataSourceProvider {
  
 		try {
 			
-			dataSource = DataSourceFactoryUtil.initDataSource(PropsUtil.getProperties("jdbc.prenotazioni.jndi.name", true));
+			dataSource = DataSourceFactoryUtil.initDataSource(PropsUtil.getProperties("jdbc.prenotazioni.jndi.name.", true));
 		}
 		catch (Exception e) {
 			e.printStackTrace();

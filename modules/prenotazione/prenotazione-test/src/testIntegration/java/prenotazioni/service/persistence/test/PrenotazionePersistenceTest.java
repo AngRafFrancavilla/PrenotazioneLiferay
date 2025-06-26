@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later OR LicenseRef-Liferay-DXP-EULA-2.0.0-2023-06
  */
 
-package prenotazione.service.persistence.test;
+package prenotazioni.service.persistence.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
@@ -40,13 +40,13 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import prenotazione.exception.NoSuchPrenotazioneException;
+import prenotazioni.exception.NoSuchPrenotazioneException;
 
-import prenotazione.model.Prenotazione;
+import prenotazioni.model.Prenotazione;
 
-import prenotazione.service.PrenotazioneLocalServiceUtil;
-import prenotazione.service.persistence.PrenotazionePersistence;
-import prenotazione.service.persistence.PrenotazioneUtil;
+import prenotazioni.service.PrenotazioneLocalServiceUtil;
+import prenotazioni.service.persistence.PrenotazionePersistence;
+import prenotazioni.service.persistence.PrenotazioneUtil;
 
 /**
  * @generated
@@ -60,7 +60,7 @@ public class PrenotazionePersistenceTest {
 		new AggregateTestRule(
 			new LiferayIntegrationTestRule(), PersistenceTestRule.INSTANCE,
 			new TransactionalTestRule(
-				Propagation.REQUIRED, "prenotazione.service"));
+				Propagation.REQUIRED, "prenotazioni.service"));
 
 	@Before
 	public void setUp() {
@@ -116,27 +116,15 @@ public class PrenotazionePersistenceTest {
 
 		Prenotazione newPrenotazione = _persistence.create(pk);
 
-		newPrenotazione.setGroupId(RandomTestUtil.nextLong());
-
-		newPrenotazione.setCompanyId(RandomTestUtil.nextLong());
-
-		newPrenotazione.setUserId(RandomTestUtil.nextLong());
-
-		newPrenotazione.setUserName(RandomTestUtil.randomString());
-
-		newPrenotazione.setCreateDate(RandomTestUtil.nextDate());
-
-		newPrenotazione.setModifiedDate(RandomTestUtil.nextDate());
-
-		newPrenotazione.setEmail(RandomTestUtil.randomString());
-
 		newPrenotazione.setData(RandomTestUtil.nextDate());
 
-		newPrenotazione.setOraInizio(RandomTestUtil.randomString());
+		newPrenotazione.setOraInizio(RandomTestUtil.nextDate());
 
-		newPrenotazione.setOraFine(RandomTestUtil.randomString());
+		newPrenotazione.setOraFine(RandomTestUtil.nextDate());
 
-		newPrenotazione.setPostazioneId(RandomTestUtil.randomString());
+		newPrenotazione.setUtentiId(RandomTestUtil.nextLong());
+
+		newPrenotazione.setPostazioneId(RandomTestUtil.nextLong());
 
 		_prenotaziones.add(_persistence.update(newPrenotazione));
 
@@ -144,33 +132,18 @@ public class PrenotazionePersistenceTest {
 			newPrenotazione.getPrimaryKey());
 
 		Assert.assertEquals(
-			existingPrenotazione.getPrenotazioneId(),
-			newPrenotazione.getPrenotazioneId());
-		Assert.assertEquals(
-			existingPrenotazione.getGroupId(), newPrenotazione.getGroupId());
-		Assert.assertEquals(
-			existingPrenotazione.getCompanyId(),
-			newPrenotazione.getCompanyId());
-		Assert.assertEquals(
-			existingPrenotazione.getUserId(), newPrenotazione.getUserId());
-		Assert.assertEquals(
-			existingPrenotazione.getUserName(), newPrenotazione.getUserName());
-		Assert.assertEquals(
-			Time.getShortTimestamp(existingPrenotazione.getCreateDate()),
-			Time.getShortTimestamp(newPrenotazione.getCreateDate()));
-		Assert.assertEquals(
-			Time.getShortTimestamp(existingPrenotazione.getModifiedDate()),
-			Time.getShortTimestamp(newPrenotazione.getModifiedDate()));
-		Assert.assertEquals(
-			existingPrenotazione.getEmail(), newPrenotazione.getEmail());
+			existingPrenotazione.getId(), newPrenotazione.getId());
 		Assert.assertEquals(
 			Time.getShortTimestamp(existingPrenotazione.getData()),
 			Time.getShortTimestamp(newPrenotazione.getData()));
 		Assert.assertEquals(
-			existingPrenotazione.getOraInizio(),
-			newPrenotazione.getOraInizio());
+			Time.getShortTimestamp(existingPrenotazione.getOraInizio()),
+			Time.getShortTimestamp(newPrenotazione.getOraInizio()));
 		Assert.assertEquals(
-			existingPrenotazione.getOraFine(), newPrenotazione.getOraFine());
+			Time.getShortTimestamp(existingPrenotazione.getOraFine()),
+			Time.getShortTimestamp(newPrenotazione.getOraFine()));
+		Assert.assertEquals(
+			existingPrenotazione.getUtentiId(), newPrenotazione.getUtentiId());
 		Assert.assertEquals(
 			existingPrenotazione.getPostazioneId(),
 			newPrenotazione.getPostazioneId());
@@ -201,10 +174,8 @@ public class PrenotazionePersistenceTest {
 
 	protected OrderByComparator<Prenotazione> getOrderByComparator() {
 		return OrderByComparatorFactoryUtil.create(
-			"Prenotazione", "prenotazioneId", true, "groupId", true,
-			"companyId", true, "userId", true, "userName", true, "createDate",
-			true, "modifiedDate", true, "email", true, "data", true,
-			"oraInizio", true, "oraFine", true, "postazioneId", true);
+			"prenotazioni", "id", true, "data", true, "oraInizio", true,
+			"oraFine", true, "utentiId", true, "postazioneId", true);
 	}
 
 	@Test
@@ -350,8 +321,7 @@ public class PrenotazionePersistenceTest {
 			Prenotazione.class, _dynamicQueryClassLoader);
 
 		dynamicQuery.add(
-			RestrictionsFactoryUtil.eq(
-				"prenotazioneId", newPrenotazione.getPrenotazioneId()));
+			RestrictionsFactoryUtil.eq("id", newPrenotazione.getId()));
 
 		List<Prenotazione> result = _persistence.findWithDynamicQuery(
 			dynamicQuery);
@@ -369,8 +339,7 @@ public class PrenotazionePersistenceTest {
 			Prenotazione.class, _dynamicQueryClassLoader);
 
 		dynamicQuery.add(
-			RestrictionsFactoryUtil.eq(
-				"prenotazioneId", RandomTestUtil.nextLong()));
+			RestrictionsFactoryUtil.eq("id", RandomTestUtil.nextLong()));
 
 		List<Prenotazione> result = _persistence.findWithDynamicQuery(
 			dynamicQuery);
@@ -385,22 +354,20 @@ public class PrenotazionePersistenceTest {
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
 			Prenotazione.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(
-			ProjectionFactoryUtil.property("prenotazioneId"));
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("id"));
 
-		Object newPrenotazioneId = newPrenotazione.getPrenotazioneId();
+		Object newId = newPrenotazione.getId();
 
 		dynamicQuery.add(
-			RestrictionsFactoryUtil.in(
-				"prenotazioneId", new Object[] {newPrenotazioneId}));
+			RestrictionsFactoryUtil.in("id", new Object[] {newId}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		Assert.assertEquals(1, result.size());
 
-		Object existingPrenotazioneId = result.get(0);
+		Object existingId = result.get(0);
 
-		Assert.assertEquals(existingPrenotazioneId, newPrenotazioneId);
+		Assert.assertEquals(existingId, newId);
 	}
 
 	@Test
@@ -408,12 +375,11 @@ public class PrenotazionePersistenceTest {
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
 			Prenotazione.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(
-			ProjectionFactoryUtil.property("prenotazioneId"));
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("id"));
 
 		dynamicQuery.add(
 			RestrictionsFactoryUtil.in(
-				"prenotazioneId", new Object[] {RandomTestUtil.nextLong()}));
+				"id", new Object[] {RandomTestUtil.nextLong()}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -425,27 +391,15 @@ public class PrenotazionePersistenceTest {
 
 		Prenotazione prenotazione = _persistence.create(pk);
 
-		prenotazione.setGroupId(RandomTestUtil.nextLong());
-
-		prenotazione.setCompanyId(RandomTestUtil.nextLong());
-
-		prenotazione.setUserId(RandomTestUtil.nextLong());
-
-		prenotazione.setUserName(RandomTestUtil.randomString());
-
-		prenotazione.setCreateDate(RandomTestUtil.nextDate());
-
-		prenotazione.setModifiedDate(RandomTestUtil.nextDate());
-
-		prenotazione.setEmail(RandomTestUtil.randomString());
-
 		prenotazione.setData(RandomTestUtil.nextDate());
 
-		prenotazione.setOraInizio(RandomTestUtil.randomString());
+		prenotazione.setOraInizio(RandomTestUtil.nextDate());
 
-		prenotazione.setOraFine(RandomTestUtil.randomString());
+		prenotazione.setOraFine(RandomTestUtil.nextDate());
 
-		prenotazione.setPostazioneId(RandomTestUtil.randomString());
+		prenotazione.setUtentiId(RandomTestUtil.nextLong());
+
+		prenotazione.setPostazioneId(RandomTestUtil.nextLong());
 
 		_prenotaziones.add(_persistence.update(prenotazione));
 
