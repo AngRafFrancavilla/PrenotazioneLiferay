@@ -16,16 +16,16 @@ import java.io.ObjectOutput;
 
 import java.util.Date;
 
-import prenotazione.model.Prenotazione;
+import prenotazione.model.Prenotazioni;
 
 /**
- * The cache model class for representing Prenotazione in entity cache.
+ * The cache model class for representing Prenotazioni in entity cache.
  *
  * @author Brian Wing Shun Chan
  * @generated
  */
-public class PrenotazioneCacheModel
-	implements CacheModel<Prenotazione>, Externalizable {
+public class PrenotazioniCacheModel
+	implements CacheModel<Prenotazioni>, Externalizable {
 
 	@Override
 	public boolean equals(Object object) {
@@ -33,14 +33,14 @@ public class PrenotazioneCacheModel
 			return true;
 		}
 
-		if (!(object instanceof PrenotazioneCacheModel)) {
+		if (!(object instanceof PrenotazioniCacheModel)) {
 			return false;
 		}
 
-		PrenotazioneCacheModel prenotazioneCacheModel =
-			(PrenotazioneCacheModel)object;
+		PrenotazioniCacheModel prenotazioniCacheModel =
+			(PrenotazioniCacheModel)object;
 
-		if (prenotazioneId == prenotazioneCacheModel.prenotazioneId) {
+		if (prenotazioneId == prenotazioniCacheModel.prenotazioneId) {
 			return true;
 		}
 
@@ -88,80 +88,80 @@ public class PrenotazioneCacheModel
 	}
 
 	@Override
-	public Prenotazione toEntityModel() {
-		PrenotazioneImpl prenotazioneImpl = new PrenotazioneImpl();
+	public Prenotazioni toEntityModel() {
+		PrenotazioniImpl prenotazioniImpl = new PrenotazioniImpl();
 
 		if (uuid == null) {
-			prenotazioneImpl.setUuid("");
+			prenotazioniImpl.setUuid("");
 		}
 		else {
-			prenotazioneImpl.setUuid(uuid);
+			prenotazioniImpl.setUuid(uuid);
 		}
 
-		prenotazioneImpl.setPrenotazioneId(prenotazioneId);
-		prenotazioneImpl.setGroupId(groupId);
-		prenotazioneImpl.setCompanyId(companyId);
-		prenotazioneImpl.setUserId(userId);
+		prenotazioniImpl.setPrenotazioneId(prenotazioneId);
+		prenotazioniImpl.setGroupId(groupId);
+		prenotazioniImpl.setCompanyId(companyId);
+		prenotazioniImpl.setUserId(userId);
 
 		if (userName == null) {
-			prenotazioneImpl.setUserName("");
+			prenotazioniImpl.setUserName("");
 		}
 		else {
-			prenotazioneImpl.setUserName(userName);
+			prenotazioniImpl.setUserName(userName);
 		}
 
 		if (createDate == Long.MIN_VALUE) {
-			prenotazioneImpl.setCreateDate(null);
+			prenotazioniImpl.setCreateDate(null);
 		}
 		else {
-			prenotazioneImpl.setCreateDate(new Date(createDate));
+			prenotazioniImpl.setCreateDate(new Date(createDate));
 		}
 
 		if (modifiedDate == Long.MIN_VALUE) {
-			prenotazioneImpl.setModifiedDate(null);
+			prenotazioniImpl.setModifiedDate(null);
 		}
 		else {
-			prenotazioneImpl.setModifiedDate(new Date(modifiedDate));
+			prenotazioniImpl.setModifiedDate(new Date(modifiedDate));
 		}
 
 		if (email == null) {
-			prenotazioneImpl.setEmail("");
+			prenotazioniImpl.setEmail("");
 		}
 		else {
-			prenotazioneImpl.setEmail(email);
+			prenotazioniImpl.setEmail(email);
 		}
 
 		if (data == Long.MIN_VALUE) {
-			prenotazioneImpl.setData(null);
+			prenotazioniImpl.setData(null);
 		}
 		else {
-			prenotazioneImpl.setData(new Date(data));
+			prenotazioniImpl.setData(new Date(data));
 		}
 
 		if (oraInizio == null) {
-			prenotazioneImpl.setOraInizio("");
+			prenotazioniImpl.setOraInizio("");
 		}
 		else {
-			prenotazioneImpl.setOraInizio(oraInizio);
+			prenotazioniImpl.setOraInizio(oraInizio);
 		}
 
 		if (oraFine == null) {
-			prenotazioneImpl.setOraFine("");
+			prenotazioniImpl.setOraFine("");
 		}
 		else {
-			prenotazioneImpl.setOraFine(oraFine);
+			prenotazioniImpl.setOraFine(oraFine);
 		}
 
 		if (postazioneId == null) {
-			prenotazioneImpl.setPostazioneId("");
+			prenotazioniImpl.setPostazioneId("");
 		}
 		else {
-			prenotazioneImpl.setPostazioneId(postazioneId);
+			prenotazioniImpl.setPostazioneId(postazioneId);
 		}
 
-		prenotazioneImpl.resetOriginalValues();
+		prenotazioniImpl.resetOriginalValues();
 
-		return prenotazioneImpl;
+		return prenotazioniImpl;
 	}
 
 	@Override

@@ -5,9 +5,9 @@
     <namespace></namespace>
 
     <entity local-service="true" 
-    		name="Prenotazione"
+    		name="Prenotazioni"
     		remote-service="true"
-    		uuid="false"
+    		uuid="true"
     		data-source="prenotazioniDataSource" >
     		
         <column name="prenotazioneId" primary="true" type="long" />

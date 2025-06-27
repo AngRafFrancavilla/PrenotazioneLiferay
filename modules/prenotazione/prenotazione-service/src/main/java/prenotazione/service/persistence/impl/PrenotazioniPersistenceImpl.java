@@ -48,19 +48,19 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
 import org.osgi.service.component.annotations.Reference;
 
-import prenotazione.exception.NoSuchPrenotazioneException;
+import prenotazione.exception.NoSuchPrenotazioniException;
 
-import prenotazione.model.Prenotazione;
-import prenotazione.model.PrenotazioneTable;
-import prenotazione.model.impl.PrenotazioneImpl;
-import prenotazione.model.impl.PrenotazioneModelImpl;
+import prenotazione.model.Prenotazioni;
+import prenotazione.model.PrenotazioniTable;
+import prenotazione.model.impl.PrenotazioniImpl;
+import prenotazione.model.impl.PrenotazioniModelImpl;
 
-import prenotazione.service.persistence.PrenotazionePersistence;
-import prenotazione.service.persistence.PrenotazioneUtil;
+import prenotazione.service.persistence.PrenotazioniPersistence;
+import prenotazione.service.persistence.PrenotazioniUtil;
 import prenotazione.service.persistence.impl.constants.PersistenceConstants;
 
 /**
- * The persistence implementation for the prenotazione service.
+ * The persistence implementation for the prenotazioni service.
  *
  * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
@@ -69,18 +69,18 @@ import prenotazione.service.persistence.impl.constants.PersistenceConstants;
  * @author Brian Wing Shun Chan
  * @generated
  */
-@Component(service = PrenotazionePersistence.class)
-public class PrenotazionePersistenceImpl
-	extends BasePersistenceImpl<Prenotazione>
-	implements PrenotazionePersistence {
+@Component(service = PrenotazioniPersistence.class)
+public class PrenotazioniPersistenceImpl
+	extends BasePersistenceImpl<Prenotazioni>
+	implements PrenotazioniPersistence {
 
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. Always use <code>PrenotazioneUtil</code> to access the prenotazione persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+	 * Never modify or reference this class directly. Always use <code>PrenotazioniUtil</code> to access the prenotazioni persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
 	 */
 	public static final String FINDER_CLASS_NAME_ENTITY =
-		PrenotazioneImpl.class.getName();
+		PrenotazioniImpl.class.getName();
 
 	public static final String FINDER_CLASS_NAME_LIST_WITH_PAGINATION =
 		FINDER_CLASS_NAME_ENTITY + ".List1";
@@ -96,72 +96,72 @@ public class PrenotazionePersistenceImpl
 	private FinderPath _finderPathCountByUuid;
 
 	/**
-	 * Returns all the prenotaziones where uuid = &#63;.
+	 * Returns all the prenotazionis where uuid = &#63;.
 	 *
 	 * @param uuid the uuid
-	 * @return the matching prenotaziones
+	 * @return the matching prenotazionis
 	 */
 	@Override
-	public List<Prenotazione> findByUuid(String uuid) {
+	public List<Prenotazioni> findByUuid(String uuid) {
 		return findByUuid(uuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the prenotaziones where uuid = &#63;.
+	 * Returns a range of all the prenotazionis where uuid = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>PrenotazioneModelImpl</code>.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>PrenotazioniModelImpl</code>.
 	 * </p>
 	 *
 	 * @param uuid the uuid
-	 * @param start the lower bound of the range of prenotaziones
-	 * @param end the upper bound of the range of prenotaziones (not inclusive)
-	 * @return the range of matching prenotaziones
+	 * @param start the lower bound of the range of prenotazionis
+	 * @param end the upper bound of the range of prenotazionis (not inclusive)
+	 * @return the range of matching prenotazionis
 	 */
 	@Override
-	public List<Prenotazione> findByUuid(String uuid, int start, int end) {
+	public List<Prenotazioni> findByUuid(String uuid, int start, int end) {
 		return findByUuid(uuid, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the prenotaziones where uuid = &#63;.
+	 * Returns an ordered range of all the prenotazionis where uuid = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>PrenotazioneModelImpl</code>.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>PrenotazioniModelImpl</code>.
 	 * </p>
 	 *
 	 * @param uuid the uuid
-	 * @param start the lower bound of the range of prenotaziones
-	 * @param end the upper bound of the range of prenotaziones (not inclusive)
+	 * @param start the lower bound of the range of prenotazionis
+	 * @param end the upper bound of the range of prenotazionis (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching prenotaziones
+	 * @return the ordered range of matching prenotazionis
 	 */
 	@Override
-	public List<Prenotazione> findByUuid(
+	public List<Prenotazioni> findByUuid(
 		String uuid, int start, int end,
-		OrderByComparator<Prenotazione> orderByComparator) {
+		OrderByComparator<Prenotazioni> orderByComparator) {
 
 		return findByUuid(uuid, start, end, orderByComparator, true);
 	}
 
 	/**
-	 * Returns an ordered range of all the prenotaziones where uuid = &#63;.
+	 * Returns an ordered range of all the prenotazionis where uuid = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>PrenotazioneModelImpl</code>.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>PrenotazioniModelImpl</code>.
 	 * </p>
 	 *
 	 * @param uuid the uuid
-	 * @param start the lower bound of the range of prenotaziones
-	 * @param end the upper bound of the range of prenotaziones (not inclusive)
+	 * @param start the lower bound of the range of prenotazionis
+	 * @param end the upper bound of the range of prenotazionis (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @param useFinderCache whether to use the finder cache
-	 * @return the ordered range of matching prenotaziones
+	 * @return the ordered range of matching prenotazionis
 	 */
 	@Override
-	public List<Prenotazione> findByUuid(
+	public List<Prenotazioni> findByUuid(
 		String uuid, int start, int end,
-		OrderByComparator<Prenotazione> orderByComparator,
+		OrderByComparator<Prenotazioni> orderByComparator,
 		boolean useFinderCache) {
 
 		uuid = Objects.toString(uuid, "");
@@ -182,15 +182,15 @@ public class PrenotazionePersistenceImpl
 			finderArgs = new Object[] {uuid, start, end, orderByComparator};
 		}
 
-		List<Prenotazione> list = null;
+		List<Prenotazioni> list = null;
 
 		if (useFinderCache) {
-			list = (List<Prenotazione>)finderCache.getResult(
+			list = (List<Prenotazioni>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
 			if ((list != null) && !list.isEmpty()) {
-				for (Prenotazione prenotazione : list) {
-					if (!uuid.equals(prenotazione.getUuid())) {
+				for (Prenotazioni prenotazioni : list) {
+					if (!uuid.equals(prenotazioni.getUuid())) {
 						list = null;
 
 						break;
@@ -210,7 +210,7 @@ public class PrenotazionePersistenceImpl
 				sb = new StringBundler(3);
 			}
 
-			sb.append(_SQL_SELECT_PRENOTAZIONE_WHERE);
+			sb.append(_SQL_SELECT_PRENOTAZIONI_WHERE);
 
 			boolean bindUuid = false;
 
@@ -228,7 +228,7 @@ public class PrenotazionePersistenceImpl
 					sb, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
 			else {
-				sb.append(PrenotazioneModelImpl.ORDER_BY_JPQL);
+				sb.append(PrenotazioniModelImpl.ORDER_BY_JPQL);
 			}
 
 			String sql = sb.toString();
@@ -246,7 +246,7 @@ public class PrenotazionePersistenceImpl
 					queryPos.add(uuid);
 				}
 
-				list = (List<Prenotazione>)QueryUtil.list(
+				list = (List<Prenotazioni>)QueryUtil.list(
 					query, getDialect(), start, end);
 
 				cacheResult(list);
@@ -267,22 +267,22 @@ public class PrenotazionePersistenceImpl
 	}
 
 	/**
-	 * Returns the first prenotazione in the ordered set where uuid = &#63;.
+	 * Returns the first prenotazioni in the ordered set where uuid = &#63;.
 	 *
 	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching prenotazione
-	 * @throws NoSuchPrenotazioneException if a matching prenotazione could not be found
+	 * @return the first matching prenotazioni
+	 * @throws NoSuchPrenotazioniException if a matching prenotazioni could not be found
 	 */
 	@Override
-	public Prenotazione findByUuid_First(
-			String uuid, OrderByComparator<Prenotazione> orderByComparator)
-		throws NoSuchPrenotazioneException {
+	public Prenotazioni findByUuid_First(
+			String uuid, OrderByComparator<Prenotazioni> orderByComparator)
+		throws NoSuchPrenotazioniException {
 
-		Prenotazione prenotazione = fetchByUuid_First(uuid, orderByComparator);
+		Prenotazioni prenotazioni = fetchByUuid_First(uuid, orderByComparator);
 
-		if (prenotazione != null) {
-			return prenotazione;
+		if (prenotazioni != null) {
+			return prenotazioni;
 		}
 
 		StringBundler sb = new StringBundler(4);
@@ -294,21 +294,21 @@ public class PrenotazionePersistenceImpl
 
 		sb.append("}");
 
-		throw new NoSuchPrenotazioneException(sb.toString());
+		throw new NoSuchPrenotazioniException(sb.toString());
 	}
 
 	/**
-	 * Returns the first prenotazione in the ordered set where uuid = &#63;.
+	 * Returns the first prenotazioni in the ordered set where uuid = &#63;.
 	 *
 	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching prenotazione, or <code>null</code> if a matching prenotazione could not be found
+	 * @return the first matching prenotazioni, or <code>null</code> if a matching prenotazioni could not be found
 	 */
 	@Override
-	public Prenotazione fetchByUuid_First(
-		String uuid, OrderByComparator<Prenotazione> orderByComparator) {
+	public Prenotazioni fetchByUuid_First(
+		String uuid, OrderByComparator<Prenotazioni> orderByComparator) {
 
-		List<Prenotazione> list = findByUuid(uuid, 0, 1, orderByComparator);
+		List<Prenotazioni> list = findByUuid(uuid, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -318,22 +318,22 @@ public class PrenotazionePersistenceImpl
 	}
 
 	/**
-	 * Returns the last prenotazione in the ordered set where uuid = &#63;.
+	 * Returns the last prenotazioni in the ordered set where uuid = &#63;.
 	 *
 	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching prenotazione
-	 * @throws NoSuchPrenotazioneException if a matching prenotazione could not be found
+	 * @return the last matching prenotazioni
+	 * @throws NoSuchPrenotazioniException if a matching prenotazioni could not be found
 	 */
 	@Override
-	public Prenotazione findByUuid_Last(
-			String uuid, OrderByComparator<Prenotazione> orderByComparator)
-		throws NoSuchPrenotazioneException {
+	public Prenotazioni findByUuid_Last(
+			String uuid, OrderByComparator<Prenotazioni> orderByComparator)
+		throws NoSuchPrenotazioniException {
 
-		Prenotazione prenotazione = fetchByUuid_Last(uuid, orderByComparator);
+		Prenotazioni prenotazioni = fetchByUuid_Last(uuid, orderByComparator);
 
-		if (prenotazione != null) {
-			return prenotazione;
+		if (prenotazioni != null) {
+			return prenotazioni;
 		}
 
 		StringBundler sb = new StringBundler(4);
@@ -345,19 +345,19 @@ public class PrenotazionePersistenceImpl
 
 		sb.append("}");
 
-		throw new NoSuchPrenotazioneException(sb.toString());
+		throw new NoSuchPrenotazioniException(sb.toString());
 	}
 
 	/**
-	 * Returns the last prenotazione in the ordered set where uuid = &#63;.
+	 * Returns the last prenotazioni in the ordered set where uuid = &#63;.
 	 *
 	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching prenotazione, or <code>null</code> if a matching prenotazione could not be found
+	 * @return the last matching prenotazioni, or <code>null</code> if a matching prenotazioni could not be found
 	 */
 	@Override
-	public Prenotazione fetchByUuid_Last(
-		String uuid, OrderByComparator<Prenotazione> orderByComparator) {
+	public Prenotazioni fetchByUuid_Last(
+		String uuid, OrderByComparator<Prenotazioni> orderByComparator) {
 
 		int count = countByUuid(uuid);
 
@@ -365,7 +365,7 @@ public class PrenotazionePersistenceImpl
 			return null;
 		}
 
-		List<Prenotazione> list = findByUuid(
+		List<Prenotazioni> list = findByUuid(
 			uuid, count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -376,38 +376,38 @@ public class PrenotazionePersistenceImpl
 	}
 
 	/**
-	 * Returns the prenotaziones before and after the current prenotazione in the ordered set where uuid = &#63;.
+	 * Returns the prenotazionis before and after the current prenotazioni in the ordered set where uuid = &#63;.
 	 *
-	 * @param prenotazioneId the primary key of the current prenotazione
+	 * @param prenotazioneId the primary key of the current prenotazioni
 	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the previous, current, and next prenotazione
-	 * @throws NoSuchPrenotazioneException if a prenotazione with the primary key could not be found
+	 * @return the previous, current, and next prenotazioni
+	 * @throws NoSuchPrenotazioniException if a prenotazioni with the primary key could not be found
 	 */
 	@Override
-	public Prenotazione[] findByUuid_PrevAndNext(
+	public Prenotazioni[] findByUuid_PrevAndNext(
 			long prenotazioneId, String uuid,
-			OrderByComparator<Prenotazione> orderByComparator)
-		throws NoSuchPrenotazioneException {
+			OrderByComparator<Prenotazioni> orderByComparator)
+		throws NoSuchPrenotazioniException {
 
 		uuid = Objects.toString(uuid, "");
 
-		Prenotazione prenotazione = findByPrimaryKey(prenotazioneId);
+		Prenotazioni prenotazioni = findByPrimaryKey(prenotazioneId);
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			Prenotazione[] array = new PrenotazioneImpl[3];
+			Prenotazioni[] array = new PrenotazioniImpl[3];
 
 			array[0] = getByUuid_PrevAndNext(
-				session, prenotazione, uuid, orderByComparator, true);
+				session, prenotazioni, uuid, orderByComparator, true);
 
-			array[1] = prenotazione;
+			array[1] = prenotazioni;
 
 			array[2] = getByUuid_PrevAndNext(
-				session, prenotazione, uuid, orderByComparator, false);
+				session, prenotazioni, uuid, orderByComparator, false);
 
 			return array;
 		}
@@ -419,9 +419,9 @@ public class PrenotazionePersistenceImpl
 		}
 	}
 
-	protected Prenotazione getByUuid_PrevAndNext(
-		Session session, Prenotazione prenotazione, String uuid,
-		OrderByComparator<Prenotazione> orderByComparator, boolean previous) {
+	protected Prenotazioni getByUuid_PrevAndNext(
+		Session session, Prenotazioni prenotazioni, String uuid,
+		OrderByComparator<Prenotazioni> orderByComparator, boolean previous) {
 
 		StringBundler sb = null;
 
@@ -434,7 +434,7 @@ public class PrenotazionePersistenceImpl
 			sb = new StringBundler(3);
 		}
 
-		sb.append(_SQL_SELECT_PRENOTAZIONE_WHERE);
+		sb.append(_SQL_SELECT_PRENOTAZIONI_WHERE);
 
 		boolean bindUuid = false;
 
@@ -504,7 +504,7 @@ public class PrenotazionePersistenceImpl
 			}
 		}
 		else {
-			sb.append(PrenotazioneModelImpl.ORDER_BY_JPQL);
+			sb.append(PrenotazioniModelImpl.ORDER_BY_JPQL);
 		}
 
 		String sql = sb.toString();
@@ -522,13 +522,13 @@ public class PrenotazionePersistenceImpl
 
 		if (orderByComparator != null) {
 			for (Object orderByConditionValue :
-					orderByComparator.getOrderByConditionValues(prenotazione)) {
+					orderByComparator.getOrderByConditionValues(prenotazioni)) {
 
 				queryPos.add(orderByConditionValue);
 			}
 		}
 
-		List<Prenotazione> list = query.list();
+		List<Prenotazioni> list = query.list();
 
 		if (list.size() == 2) {
 			return list.get(1);
@@ -539,24 +539,24 @@ public class PrenotazionePersistenceImpl
 	}
 
 	/**
-	 * Removes all the prenotaziones where uuid = &#63; from the database.
+	 * Removes all the prenotazionis where uuid = &#63; from the database.
 	 *
 	 * @param uuid the uuid
 	 */
 	@Override
 	public void removeByUuid(String uuid) {
-		for (Prenotazione prenotazione :
+		for (Prenotazioni prenotazioni :
 				findByUuid(uuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 
-			remove(prenotazione);
+			remove(prenotazioni);
 		}
 	}
 
 	/**
-	 * Returns the number of prenotaziones where uuid = &#63;.
+	 * Returns the number of prenotazionis where uuid = &#63;.
 	 *
 	 * @param uuid the uuid
-	 * @return the number of matching prenotaziones
+	 * @return the number of matching prenotazionis
 	 */
 	@Override
 	public int countByUuid(String uuid) {
@@ -571,7 +571,7 @@ public class PrenotazionePersistenceImpl
 		if (count == null) {
 			StringBundler sb = new StringBundler(2);
 
-			sb.append(_SQL_COUNT_PRENOTAZIONE_WHERE);
+			sb.append(_SQL_COUNT_PRENOTAZIONI_WHERE);
 
 			boolean bindUuid = false;
 
@@ -615,28 +615,28 @@ public class PrenotazionePersistenceImpl
 	}
 
 	private static final String _FINDER_COLUMN_UUID_UUID_2 =
-		"prenotazione.uuid = ?";
+		"prenotazioni.uuid = ?";
 
 	private static final String _FINDER_COLUMN_UUID_UUID_3 =
-		"(prenotazione.uuid IS NULL OR prenotazione.uuid = '')";
+		"(prenotazioni.uuid IS NULL OR prenotazioni.uuid = '')";
 
 	private FinderPath _finderPathFetchByUUID_G;
 
 	/**
-	 * Returns the prenotazione where uuid = &#63; and groupId = &#63; or throws a <code>NoSuchPrenotazioneException</code> if it could not be found.
+	 * Returns the prenotazioni where uuid = &#63; and groupId = &#63; or throws a <code>NoSuchPrenotazioniException</code> if it could not be found.
 	 *
 	 * @param uuid the uuid
 	 * @param groupId the group ID
-	 * @return the matching prenotazione
-	 * @throws NoSuchPrenotazioneException if a matching prenotazione could not be found
+	 * @return the matching prenotazioni
+	 * @throws NoSuchPrenotazioniException if a matching prenotazioni could not be found
 	 */
 	@Override
-	public Prenotazione findByUUID_G(String uuid, long groupId)
-		throws NoSuchPrenotazioneException {
+	public Prenotazioni findByUUID_G(String uuid, long groupId)
+		throws NoSuchPrenotazioniException {
 
-		Prenotazione prenotazione = fetchByUUID_G(uuid, groupId);
+		Prenotazioni prenotazioni = fetchByUUID_G(uuid, groupId);
 
-		if (prenotazione == null) {
+		if (prenotazioni == null) {
 			StringBundler sb = new StringBundler(6);
 
 			sb.append(_NO_SUCH_ENTITY_WITH_KEY);
@@ -653,34 +653,34 @@ public class PrenotazionePersistenceImpl
 				_log.debug(sb.toString());
 			}
 
-			throw new NoSuchPrenotazioneException(sb.toString());
+			throw new NoSuchPrenotazioniException(sb.toString());
 		}
 
-		return prenotazione;
+		return prenotazioni;
 	}
 
 	/**
-	 * Returns the prenotazione where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the prenotazioni where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
 	 * @param uuid the uuid
 	 * @param groupId the group ID
-	 * @return the matching prenotazione, or <code>null</code> if a matching prenotazione could not be found
+	 * @return the matching prenotazioni, or <code>null</code> if a matching prenotazioni could not be found
 	 */
 	@Override
-	public Prenotazione fetchByUUID_G(String uuid, long groupId) {
+	public Prenotazioni fetchByUUID_G(String uuid, long groupId) {
 		return fetchByUUID_G(uuid, groupId, true);
 	}
 
 	/**
-	 * Returns the prenotazione where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the prenotazioni where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
 	 * @param uuid the uuid
 	 * @param groupId the group ID
 	 * @param useFinderCache whether to use the finder cache
-	 * @return the matching prenotazione, or <code>null</code> if a matching prenotazione could not be found
+	 * @return the matching prenotazioni, or <code>null</code> if a matching prenotazioni could not be found
 	 */
 	@Override
-	public Prenotazione fetchByUUID_G(
+	public Prenotazioni fetchByUUID_G(
 		String uuid, long groupId, boolean useFinderCache) {
 
 		uuid = Objects.toString(uuid, "");
@@ -698,11 +698,11 @@ public class PrenotazionePersistenceImpl
 				_finderPathFetchByUUID_G, finderArgs, this);
 		}
 
-		if (result instanceof Prenotazione) {
-			Prenotazione prenotazione = (Prenotazione)result;
+		if (result instanceof Prenotazioni) {
+			Prenotazioni prenotazioni = (Prenotazioni)result;
 
-			if (!Objects.equals(uuid, prenotazione.getUuid()) ||
-				(groupId != prenotazione.getGroupId())) {
+			if (!Objects.equals(uuid, prenotazioni.getUuid()) ||
+				(groupId != prenotazioni.getGroupId())) {
 
 				result = null;
 			}
@@ -711,7 +711,7 @@ public class PrenotazionePersistenceImpl
 		if (result == null) {
 			StringBundler sb = new StringBundler(4);
 
-			sb.append(_SQL_SELECT_PRENOTAZIONE_WHERE);
+			sb.append(_SQL_SELECT_PRENOTAZIONI_WHERE);
 
 			boolean bindUuid = false;
 
@@ -743,7 +743,7 @@ public class PrenotazionePersistenceImpl
 
 				queryPos.add(groupId);
 
-				List<Prenotazione> list = query.list();
+				List<Prenotazioni> list = query.list();
 
 				if (list.isEmpty()) {
 					if (useFinderCache) {
@@ -752,11 +752,11 @@ public class PrenotazionePersistenceImpl
 					}
 				}
 				else {
-					Prenotazione prenotazione = list.get(0);
+					Prenotazioni prenotazioni = list.get(0);
 
-					result = prenotazione;
+					result = prenotazioni;
 
-					cacheResult(prenotazione);
+					cacheResult(prenotazioni);
 				}
 			}
 			catch (Exception exception) {
@@ -771,38 +771,38 @@ public class PrenotazionePersistenceImpl
 			return null;
 		}
 		else {
-			return (Prenotazione)result;
+			return (Prenotazioni)result;
 		}
 	}
 
 	/**
-	 * Removes the prenotazione where uuid = &#63; and groupId = &#63; from the database.
+	 * Removes the prenotazioni where uuid = &#63; and groupId = &#63; from the database.
 	 *
 	 * @param uuid the uuid
 	 * @param groupId the group ID
-	 * @return the prenotazione that was removed
+	 * @return the prenotazioni that was removed
 	 */
 	@Override
-	public Prenotazione removeByUUID_G(String uuid, long groupId)
-		throws NoSuchPrenotazioneException {
+	public Prenotazioni removeByUUID_G(String uuid, long groupId)
+		throws NoSuchPrenotazioniException {
 
-		Prenotazione prenotazione = findByUUID_G(uuid, groupId);
+		Prenotazioni prenotazioni = findByUUID_G(uuid, groupId);
 
-		return remove(prenotazione);
+		return remove(prenotazioni);
 	}
 
 	/**
-	 * Returns the number of prenotaziones where uuid = &#63; and groupId = &#63;.
+	 * Returns the number of prenotazionis where uuid = &#63; and groupId = &#63;.
 	 *
 	 * @param uuid the uuid
 	 * @param groupId the group ID
-	 * @return the number of matching prenotaziones
+	 * @return the number of matching prenotazionis
 	 */
 	@Override
 	public int countByUUID_G(String uuid, long groupId) {
-		Prenotazione prenotazione = fetchByUUID_G(uuid, groupId);
+		Prenotazioni prenotazioni = fetchByUUID_G(uuid, groupId);
 
-		if (prenotazione == null) {
+		if (prenotazioni == null) {
 			return 0;
 		}
 
@@ -810,93 +810,93 @@ public class PrenotazionePersistenceImpl
 	}
 
 	private static final String _FINDER_COLUMN_UUID_G_UUID_2 =
-		"prenotazione.uuid = ? AND ";
+		"prenotazioni.uuid = ? AND ";
 
 	private static final String _FINDER_COLUMN_UUID_G_UUID_3 =
-		"(prenotazione.uuid IS NULL OR prenotazione.uuid = '') AND ";
+		"(prenotazioni.uuid IS NULL OR prenotazioni.uuid = '') AND ";
 
 	private static final String _FINDER_COLUMN_UUID_G_GROUPID_2 =
-		"prenotazione.groupId = ?";
+		"prenotazioni.groupId = ?";
 
 	private FinderPath _finderPathWithPaginationFindByUuid_C;
 	private FinderPath _finderPathWithoutPaginationFindByUuid_C;
 	private FinderPath _finderPathCountByUuid_C;
 
 	/**
-	 * Returns all the prenotaziones where uuid = &#63; and companyId = &#63;.
+	 * Returns all the prenotazionis where uuid = &#63; and companyId = &#63;.
 	 *
 	 * @param uuid the uuid
 	 * @param companyId the company ID
-	 * @return the matching prenotaziones
+	 * @return the matching prenotazionis
 	 */
 	@Override
-	public List<Prenotazione> findByUuid_C(String uuid, long companyId) {
+	public List<Prenotazioni> findByUuid_C(String uuid, long companyId) {
 		return findByUuid_C(
 			uuid, companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the prenotaziones where uuid = &#63; and companyId = &#63;.
+	 * Returns a range of all the prenotazionis where uuid = &#63; and companyId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>PrenotazioneModelImpl</code>.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>PrenotazioniModelImpl</code>.
 	 * </p>
 	 *
 	 * @param uuid the uuid
 	 * @param companyId the company ID
-	 * @param start the lower bound of the range of prenotaziones
-	 * @param end the upper bound of the range of prenotaziones (not inclusive)
-	 * @return the range of matching prenotaziones
+	 * @param start the lower bound of the range of prenotazionis
+	 * @param end the upper bound of the range of prenotazionis (not inclusive)
+	 * @return the range of matching prenotazionis
 	 */
 	@Override
-	public List<Prenotazione> findByUuid_C(
+	public List<Prenotazioni> findByUuid_C(
 		String uuid, long companyId, int start, int end) {
 
 		return findByUuid_C(uuid, companyId, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the prenotaziones where uuid = &#63; and companyId = &#63;.
+	 * Returns an ordered range of all the prenotazionis where uuid = &#63; and companyId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>PrenotazioneModelImpl</code>.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>PrenotazioniModelImpl</code>.
 	 * </p>
 	 *
 	 * @param uuid the uuid
 	 * @param companyId the company ID
-	 * @param start the lower bound of the range of prenotaziones
-	 * @param end the upper bound of the range of prenotaziones (not inclusive)
+	 * @param start the lower bound of the range of prenotazionis
+	 * @param end the upper bound of the range of prenotazionis (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching prenotaziones
+	 * @return the ordered range of matching prenotazionis
 	 */
 	@Override
-	public List<Prenotazione> findByUuid_C(
+	public List<Prenotazioni> findByUuid_C(
 		String uuid, long companyId, int start, int end,
-		OrderByComparator<Prenotazione> orderByComparator) {
+		OrderByComparator<Prenotazioni> orderByComparator) {
 
 		return findByUuid_C(
 			uuid, companyId, start, end, orderByComparator, true);
 	}
 
 	/**
-	 * Returns an ordered range of all the prenotaziones where uuid = &#63; and companyId = &#63;.
+	 * Returns an ordered range of all the prenotazionis where uuid = &#63; and companyId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>PrenotazioneModelImpl</code>.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>PrenotazioniModelImpl</code>.
 	 * </p>
 	 *
 	 * @param uuid the uuid
 	 * @param companyId the company ID
-	 * @param start the lower bound of the range of prenotaziones
-	 * @param end the upper bound of the range of prenotaziones (not inclusive)
+	 * @param start the lower bound of the range of prenotazionis
+	 * @param end the upper bound of the range of prenotazionis (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @param useFinderCache whether to use the finder cache
-	 * @return the ordered range of matching prenotaziones
+	 * @return the ordered range of matching prenotazionis
 	 */
 	@Override
-	public List<Prenotazione> findByUuid_C(
+	public List<Prenotazioni> findByUuid_C(
 		String uuid, long companyId, int start, int end,
-		OrderByComparator<Prenotazione> orderByComparator,
+		OrderByComparator<Prenotazioni> orderByComparator,
 		boolean useFinderCache) {
 
 		uuid = Objects.toString(uuid, "");
@@ -919,16 +919,16 @@ public class PrenotazionePersistenceImpl
 			};
 		}
 
-		List<Prenotazione> list = null;
+		List<Prenotazioni> list = null;
 
 		if (useFinderCache) {
-			list = (List<Prenotazione>)finderCache.getResult(
+			list = (List<Prenotazioni>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
 			if ((list != null) && !list.isEmpty()) {
-				for (Prenotazione prenotazione : list) {
-					if (!uuid.equals(prenotazione.getUuid()) ||
-						(companyId != prenotazione.getCompanyId())) {
+				for (Prenotazioni prenotazioni : list) {
+					if (!uuid.equals(prenotazioni.getUuid()) ||
+						(companyId != prenotazioni.getCompanyId())) {
 
 						list = null;
 
@@ -949,7 +949,7 @@ public class PrenotazionePersistenceImpl
 				sb = new StringBundler(4);
 			}
 
-			sb.append(_SQL_SELECT_PRENOTAZIONE_WHERE);
+			sb.append(_SQL_SELECT_PRENOTAZIONI_WHERE);
 
 			boolean bindUuid = false;
 
@@ -969,7 +969,7 @@ public class PrenotazionePersistenceImpl
 					sb, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
 			else {
-				sb.append(PrenotazioneModelImpl.ORDER_BY_JPQL);
+				sb.append(PrenotazioniModelImpl.ORDER_BY_JPQL);
 			}
 
 			String sql = sb.toString();
@@ -989,7 +989,7 @@ public class PrenotazionePersistenceImpl
 
 				queryPos.add(companyId);
 
-				list = (List<Prenotazione>)QueryUtil.list(
+				list = (List<Prenotazioni>)QueryUtil.list(
 					query, getDialect(), start, end);
 
 				cacheResult(list);
@@ -1010,25 +1010,25 @@ public class PrenotazionePersistenceImpl
 	}
 
 	/**
-	 * Returns the first prenotazione in the ordered set where uuid = &#63; and companyId = &#63;.
+	 * Returns the first prenotazioni in the ordered set where uuid = &#63; and companyId = &#63;.
 	 *
 	 * @param uuid the uuid
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching prenotazione
-	 * @throws NoSuchPrenotazioneException if a matching prenotazione could not be found
+	 * @return the first matching prenotazioni
+	 * @throws NoSuchPrenotazioniException if a matching prenotazioni could not be found
 	 */
 	@Override
-	public Prenotazione findByUuid_C_First(
+	public Prenotazioni findByUuid_C_First(
 			String uuid, long companyId,
-			OrderByComparator<Prenotazione> orderByComparator)
-		throws NoSuchPrenotazioneException {
+			OrderByComparator<Prenotazioni> orderByComparator)
+		throws NoSuchPrenotazioniException {
 
-		Prenotazione prenotazione = fetchByUuid_C_First(
+		Prenotazioni prenotazioni = fetchByUuid_C_First(
 			uuid, companyId, orderByComparator);
 
-		if (prenotazione != null) {
-			return prenotazione;
+		if (prenotazioni != null) {
+			return prenotazioni;
 		}
 
 		StringBundler sb = new StringBundler(6);
@@ -1043,23 +1043,23 @@ public class PrenotazionePersistenceImpl
 
 		sb.append("}");
 
-		throw new NoSuchPrenotazioneException(sb.toString());
+		throw new NoSuchPrenotazioniException(sb.toString());
 	}
 
 	/**
-	 * Returns the first prenotazione in the ordered set where uuid = &#63; and companyId = &#63;.
+	 * Returns the first prenotazioni in the ordered set where uuid = &#63; and companyId = &#63;.
 	 *
 	 * @param uuid the uuid
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching prenotazione, or <code>null</code> if a matching prenotazione could not be found
+	 * @return the first matching prenotazioni, or <code>null</code> if a matching prenotazioni could not be found
 	 */
 	@Override
-	public Prenotazione fetchByUuid_C_First(
+	public Prenotazioni fetchByUuid_C_First(
 		String uuid, long companyId,
-		OrderByComparator<Prenotazione> orderByComparator) {
+		OrderByComparator<Prenotazioni> orderByComparator) {
 
-		List<Prenotazione> list = findByUuid_C(
+		List<Prenotazioni> list = findByUuid_C(
 			uuid, companyId, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -1070,25 +1070,25 @@ public class PrenotazionePersistenceImpl
 	}
 
 	/**
-	 * Returns the last prenotazione in the ordered set where uuid = &#63; and companyId = &#63;.
+	 * Returns the last prenotazioni in the ordered set where uuid = &#63; and companyId = &#63;.
 	 *
 	 * @param uuid the uuid
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching prenotazione
-	 * @throws NoSuchPrenotazioneException if a matching prenotazione could not be found
+	 * @return the last matching prenotazioni
+	 * @throws NoSuchPrenotazioniException if a matching prenotazioni could not be found
 	 */
 	@Override
-	public Prenotazione findByUuid_C_Last(
+	public Prenotazioni findByUuid_C_Last(
 			String uuid, long companyId,
-			OrderByComparator<Prenotazione> orderByComparator)
-		throws NoSuchPrenotazioneException {
+			OrderByComparator<Prenotazioni> orderByComparator)
+		throws NoSuchPrenotazioniException {
 
-		Prenotazione prenotazione = fetchByUuid_C_Last(
+		Prenotazioni prenotazioni = fetchByUuid_C_Last(
 			uuid, companyId, orderByComparator);
 
-		if (prenotazione != null) {
-			return prenotazione;
+		if (prenotazioni != null) {
+			return prenotazioni;
 		}
 
 		StringBundler sb = new StringBundler(6);
@@ -1103,21 +1103,21 @@ public class PrenotazionePersistenceImpl
 
 		sb.append("}");
 
-		throw new NoSuchPrenotazioneException(sb.toString());
+		throw new NoSuchPrenotazioniException(sb.toString());
 	}
 
 	/**
-	 * Returns the last prenotazione in the ordered set where uuid = &#63; and companyId = &#63;.
+	 * Returns the last prenotazioni in the ordered set where uuid = &#63; and companyId = &#63;.
 	 *
 	 * @param uuid the uuid
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching prenotazione, or <code>null</code> if a matching prenotazione could not be found
+	 * @return the last matching prenotazioni, or <code>null</code> if a matching prenotazioni could not be found
 	 */
 	@Override
-	public Prenotazione fetchByUuid_C_Last(
+	public Prenotazioni fetchByUuid_C_Last(
 		String uuid, long companyId,
-		OrderByComparator<Prenotazione> orderByComparator) {
+		OrderByComparator<Prenotazioni> orderByComparator) {
 
 		int count = countByUuid_C(uuid, companyId);
 
@@ -1125,7 +1125,7 @@ public class PrenotazionePersistenceImpl
 			return null;
 		}
 
-		List<Prenotazione> list = findByUuid_C(
+		List<Prenotazioni> list = findByUuid_C(
 			uuid, companyId, count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -1136,40 +1136,40 @@ public class PrenotazionePersistenceImpl
 	}
 
 	/**
-	 * Returns the prenotaziones before and after the current prenotazione in the ordered set where uuid = &#63; and companyId = &#63;.
+	 * Returns the prenotazionis before and after the current prenotazioni in the ordered set where uuid = &#63; and companyId = &#63;.
 	 *
-	 * @param prenotazioneId the primary key of the current prenotazione
+	 * @param prenotazioneId the primary key of the current prenotazioni
 	 * @param uuid the uuid
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the previous, current, and next prenotazione
-	 * @throws NoSuchPrenotazioneException if a prenotazione with the primary key could not be found
+	 * @return the previous, current, and next prenotazioni
+	 * @throws NoSuchPrenotazioniException if a prenotazioni with the primary key could not be found
 	 */
 	@Override
-	public Prenotazione[] findByUuid_C_PrevAndNext(
+	public Prenotazioni[] findByUuid_C_PrevAndNext(
 			long prenotazioneId, String uuid, long companyId,
-			OrderByComparator<Prenotazione> orderByComparator)
-		throws NoSuchPrenotazioneException {
+			OrderByComparator<Prenotazioni> orderByComparator)
+		throws NoSuchPrenotazioniException {
 
 		uuid = Objects.toString(uuid, "");
 
-		Prenotazione prenotazione = findByPrimaryKey(prenotazioneId);
+		Prenotazioni prenotazioni = findByPrimaryKey(prenotazioneId);
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			Prenotazione[] array = new PrenotazioneImpl[3];
+			Prenotazioni[] array = new PrenotazioniImpl[3];
 
 			array[0] = getByUuid_C_PrevAndNext(
-				session, prenotazione, uuid, companyId, orderByComparator,
+				session, prenotazioni, uuid, companyId, orderByComparator,
 				true);
 
-			array[1] = prenotazione;
+			array[1] = prenotazioni;
 
 			array[2] = getByUuid_C_PrevAndNext(
-				session, prenotazione, uuid, companyId, orderByComparator,
+				session, prenotazioni, uuid, companyId, orderByComparator,
 				false);
 
 			return array;
@@ -1182,9 +1182,9 @@ public class PrenotazionePersistenceImpl
 		}
 	}
 
-	protected Prenotazione getByUuid_C_PrevAndNext(
-		Session session, Prenotazione prenotazione, String uuid, long companyId,
-		OrderByComparator<Prenotazione> orderByComparator, boolean previous) {
+	protected Prenotazioni getByUuid_C_PrevAndNext(
+		Session session, Prenotazioni prenotazioni, String uuid, long companyId,
+		OrderByComparator<Prenotazioni> orderByComparator, boolean previous) {
 
 		StringBundler sb = null;
 
@@ -1197,7 +1197,7 @@ public class PrenotazionePersistenceImpl
 			sb = new StringBundler(4);
 		}
 
-		sb.append(_SQL_SELECT_PRENOTAZIONE_WHERE);
+		sb.append(_SQL_SELECT_PRENOTAZIONI_WHERE);
 
 		boolean bindUuid = false;
 
@@ -1269,7 +1269,7 @@ public class PrenotazionePersistenceImpl
 			}
 		}
 		else {
-			sb.append(PrenotazioneModelImpl.ORDER_BY_JPQL);
+			sb.append(PrenotazioniModelImpl.ORDER_BY_JPQL);
 		}
 
 		String sql = sb.toString();
@@ -1289,13 +1289,13 @@ public class PrenotazionePersistenceImpl
 
 		if (orderByComparator != null) {
 			for (Object orderByConditionValue :
-					orderByComparator.getOrderByConditionValues(prenotazione)) {
+					orderByComparator.getOrderByConditionValues(prenotazioni)) {
 
 				queryPos.add(orderByConditionValue);
 			}
 		}
 
-		List<Prenotazione> list = query.list();
+		List<Prenotazioni> list = query.list();
 
 		if (list.size() == 2) {
 			return list.get(1);
@@ -1306,28 +1306,28 @@ public class PrenotazionePersistenceImpl
 	}
 
 	/**
-	 * Removes all the prenotaziones where uuid = &#63; and companyId = &#63; from the database.
+	 * Removes all the prenotazionis where uuid = &#63; and companyId = &#63; from the database.
 	 *
 	 * @param uuid the uuid
 	 * @param companyId the company ID
 	 */
 	@Override
 	public void removeByUuid_C(String uuid, long companyId) {
-		for (Prenotazione prenotazione :
+		for (Prenotazioni prenotazioni :
 				findByUuid_C(
 					uuid, companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 					null)) {
 
-			remove(prenotazione);
+			remove(prenotazioni);
 		}
 	}
 
 	/**
-	 * Returns the number of prenotaziones where uuid = &#63; and companyId = &#63;.
+	 * Returns the number of prenotazionis where uuid = &#63; and companyId = &#63;.
 	 *
 	 * @param uuid the uuid
 	 * @param companyId the company ID
-	 * @return the number of matching prenotaziones
+	 * @return the number of matching prenotazionis
 	 */
 	@Override
 	public int countByUuid_C(String uuid, long companyId) {
@@ -1342,7 +1342,7 @@ public class PrenotazionePersistenceImpl
 		if (count == null) {
 			StringBundler sb = new StringBundler(3);
 
-			sb.append(_SQL_COUNT_PRENOTAZIONE_WHERE);
+			sb.append(_SQL_COUNT_PRENOTAZIONI_WHERE);
 
 			boolean bindUuid = false;
 
@@ -1390,15 +1390,15 @@ public class PrenotazionePersistenceImpl
 	}
 
 	private static final String _FINDER_COLUMN_UUID_C_UUID_2 =
-		"prenotazione.uuid = ? AND ";
+		"prenotazioni.uuid = ? AND ";
 
 	private static final String _FINDER_COLUMN_UUID_C_UUID_3 =
-		"(prenotazione.uuid IS NULL OR prenotazione.uuid = '') AND ";
+		"(prenotazioni.uuid IS NULL OR prenotazioni.uuid = '') AND ";
 
 	private static final String _FINDER_COLUMN_UUID_C_COMPANYID_2 =
-		"prenotazione.companyId = ?";
+		"prenotazioni.companyId = ?";
 
-	public PrenotazionePersistenceImpl() {
+	public PrenotazioniPersistenceImpl() {
 		Map<String, String> dbColumnNames = new HashMap<String, String>();
 
 		dbColumnNames.put("uuid", "uuid_");
@@ -1406,58 +1406,58 @@ public class PrenotazionePersistenceImpl
 
 		setDBColumnNames(dbColumnNames);
 
-		setModelClass(Prenotazione.class);
+		setModelClass(Prenotazioni.class);
 
-		setModelImplClass(PrenotazioneImpl.class);
+		setModelImplClass(PrenotazioniImpl.class);
 		setModelPKClass(long.class);
 
-		setTable(PrenotazioneTable.INSTANCE);
+		setTable(PrenotazioniTable.INSTANCE);
 	}
 
 	/**
-	 * Caches the prenotazione in the entity cache if it is enabled.
+	 * Caches the prenotazioni in the entity cache if it is enabled.
 	 *
-	 * @param prenotazione the prenotazione
+	 * @param prenotazioni the prenotazioni
 	 */
 	@Override
-	public void cacheResult(Prenotazione prenotazione) {
+	public void cacheResult(Prenotazioni prenotazioni) {
 		entityCache.putResult(
-			PrenotazioneImpl.class, prenotazione.getPrimaryKey(), prenotazione);
+			PrenotazioniImpl.class, prenotazioni.getPrimaryKey(), prenotazioni);
 
 		finderCache.putResult(
 			_finderPathFetchByUUID_G,
-			new Object[] {prenotazione.getUuid(), prenotazione.getGroupId()},
-			prenotazione);
+			new Object[] {prenotazioni.getUuid(), prenotazioni.getGroupId()},
+			prenotazioni);
 	}
 
 	private int _valueObjectFinderCacheListThreshold;
 
 	/**
-	 * Caches the prenotaziones in the entity cache if it is enabled.
+	 * Caches the prenotazionis in the entity cache if it is enabled.
 	 *
-	 * @param prenotaziones the prenotaziones
+	 * @param prenotazionis the prenotazionis
 	 */
 	@Override
-	public void cacheResult(List<Prenotazione> prenotaziones) {
+	public void cacheResult(List<Prenotazioni> prenotazionis) {
 		if ((_valueObjectFinderCacheListThreshold == 0) ||
 			((_valueObjectFinderCacheListThreshold > 0) &&
-			 (prenotaziones.size() > _valueObjectFinderCacheListThreshold))) {
+			 (prenotazionis.size() > _valueObjectFinderCacheListThreshold))) {
 
 			return;
 		}
 
-		for (Prenotazione prenotazione : prenotaziones) {
+		for (Prenotazioni prenotazioni : prenotazionis) {
 			if (entityCache.getResult(
-					PrenotazioneImpl.class, prenotazione.getPrimaryKey()) ==
+					PrenotazioniImpl.class, prenotazioni.getPrimaryKey()) ==
 						null) {
 
-				cacheResult(prenotazione);
+				cacheResult(prenotazioni);
 			}
 		}
 	}
 
 	/**
-	 * Clears the cache for all prenotaziones.
+	 * Clears the cache for all prenotazionis.
 	 *
 	 * <p>
 	 * The <code>EntityCache</code> and <code>FinderCache</code> are both cleared by this method.
@@ -1465,117 +1465,117 @@ public class PrenotazionePersistenceImpl
 	 */
 	@Override
 	public void clearCache() {
-		entityCache.clearCache(PrenotazioneImpl.class);
+		entityCache.clearCache(PrenotazioniImpl.class);
 
-		finderCache.clearCache(PrenotazioneImpl.class);
+		finderCache.clearCache(PrenotazioniImpl.class);
 	}
 
 	/**
-	 * Clears the cache for the prenotazione.
+	 * Clears the cache for the prenotazioni.
 	 *
 	 * <p>
 	 * The <code>EntityCache</code> and <code>FinderCache</code> are both cleared by this method.
 	 * </p>
 	 */
 	@Override
-	public void clearCache(Prenotazione prenotazione) {
-		entityCache.removeResult(PrenotazioneImpl.class, prenotazione);
+	public void clearCache(Prenotazioni prenotazioni) {
+		entityCache.removeResult(PrenotazioniImpl.class, prenotazioni);
 	}
 
 	@Override
-	public void clearCache(List<Prenotazione> prenotaziones) {
-		for (Prenotazione prenotazione : prenotaziones) {
-			entityCache.removeResult(PrenotazioneImpl.class, prenotazione);
+	public void clearCache(List<Prenotazioni> prenotazionis) {
+		for (Prenotazioni prenotazioni : prenotazionis) {
+			entityCache.removeResult(PrenotazioniImpl.class, prenotazioni);
 		}
 	}
 
 	@Override
 	public void clearCache(Set<Serializable> primaryKeys) {
-		finderCache.clearCache(PrenotazioneImpl.class);
+		finderCache.clearCache(PrenotazioniImpl.class);
 
 		for (Serializable primaryKey : primaryKeys) {
-			entityCache.removeResult(PrenotazioneImpl.class, primaryKey);
+			entityCache.removeResult(PrenotazioniImpl.class, primaryKey);
 		}
 	}
 
 	protected void cacheUniqueFindersCache(
-		PrenotazioneModelImpl prenotazioneModelImpl) {
+		PrenotazioniModelImpl prenotazioniModelImpl) {
 
 		Object[] args = new Object[] {
-			prenotazioneModelImpl.getUuid(), prenotazioneModelImpl.getGroupId()
+			prenotazioniModelImpl.getUuid(), prenotazioniModelImpl.getGroupId()
 		};
 
 		finderCache.putResult(
-			_finderPathFetchByUUID_G, args, prenotazioneModelImpl);
+			_finderPathFetchByUUID_G, args, prenotazioniModelImpl);
 	}
 
 	/**
-	 * Creates a new prenotazione with the primary key. Does not add the prenotazione to the database.
+	 * Creates a new prenotazioni with the primary key. Does not add the prenotazioni to the database.
 	 *
-	 * @param prenotazioneId the primary key for the new prenotazione
-	 * @return the new prenotazione
+	 * @param prenotazioneId the primary key for the new prenotazioni
+	 * @return the new prenotazioni
 	 */
 	@Override
-	public Prenotazione create(long prenotazioneId) {
-		Prenotazione prenotazione = new PrenotazioneImpl();
+	public Prenotazioni create(long prenotazioneId) {
+		Prenotazioni prenotazioni = new PrenotazioniImpl();
 
-		prenotazione.setNew(true);
-		prenotazione.setPrimaryKey(prenotazioneId);
+		prenotazioni.setNew(true);
+		prenotazioni.setPrimaryKey(prenotazioneId);
 
 		String uuid = PortalUUIDUtil.generate();
 
-		prenotazione.setUuid(uuid);
+		prenotazioni.setUuid(uuid);
 
-		prenotazione.setCompanyId(CompanyThreadLocal.getCompanyId());
+		prenotazioni.setCompanyId(CompanyThreadLocal.getCompanyId());
 
-		return prenotazione;
+		return prenotazioni;
 	}
 
 	/**
-	 * Removes the prenotazione with the primary key from the database. Also notifies the appropriate model listeners.
+	 * Removes the prenotazioni with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param prenotazioneId the primary key of the prenotazione
-	 * @return the prenotazione that was removed
-	 * @throws NoSuchPrenotazioneException if a prenotazione with the primary key could not be found
+	 * @param prenotazioneId the primary key of the prenotazioni
+	 * @return the prenotazioni that was removed
+	 * @throws NoSuchPrenotazioniException if a prenotazioni with the primary key could not be found
 	 */
 	@Override
-	public Prenotazione remove(long prenotazioneId)
-		throws NoSuchPrenotazioneException {
+	public Prenotazioni remove(long prenotazioneId)
+		throws NoSuchPrenotazioniException {
 
 		return remove((Serializable)prenotazioneId);
 	}
 
 	/**
-	 * Removes the prenotazione with the primary key from the database. Also notifies the appropriate model listeners.
+	 * Removes the prenotazioni with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the prenotazione
-	 * @return the prenotazione that was removed
-	 * @throws NoSuchPrenotazioneException if a prenotazione with the primary key could not be found
+	 * @param primaryKey the primary key of the prenotazioni
+	 * @return the prenotazioni that was removed
+	 * @throws NoSuchPrenotazioniException if a prenotazioni with the primary key could not be found
 	 */
 	@Override
-	public Prenotazione remove(Serializable primaryKey)
-		throws NoSuchPrenotazioneException {
+	public Prenotazioni remove(Serializable primaryKey)
+		throws NoSuchPrenotazioniException {
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			Prenotazione prenotazione = (Prenotazione)session.get(
-				PrenotazioneImpl.class, primaryKey);
+			Prenotazioni prenotazioni = (Prenotazioni)session.get(
+				PrenotazioniImpl.class, primaryKey);
 
-			if (prenotazione == null) {
+			if (prenotazioni == null) {
 				if (_log.isDebugEnabled()) {
 					_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
-				throw new NoSuchPrenotazioneException(
+				throw new NoSuchPrenotazioniException(
 					_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
-			return remove(prenotazione);
+			return remove(prenotazioni);
 		}
-		catch (NoSuchPrenotazioneException noSuchEntityException) {
+		catch (NoSuchPrenotazioniException noSuchEntityException) {
 			throw noSuchEntityException;
 		}
 		catch (Exception exception) {
@@ -1587,19 +1587,19 @@ public class PrenotazionePersistenceImpl
 	}
 
 	@Override
-	protected Prenotazione removeImpl(Prenotazione prenotazione) {
+	protected Prenotazioni removeImpl(Prenotazioni prenotazioni) {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (!session.contains(prenotazione)) {
-				prenotazione = (Prenotazione)session.get(
-					PrenotazioneImpl.class, prenotazione.getPrimaryKeyObj());
+			if (!session.contains(prenotazioni)) {
+				prenotazioni = (Prenotazioni)session.get(
+					PrenotazioniImpl.class, prenotazioni.getPrimaryKeyObj());
 			}
 
-			if (prenotazione != null) {
-				session.delete(prenotazione);
+			if (prenotazioni != null) {
+				session.delete(prenotazioni);
 			}
 		}
 		catch (Exception exception) {
@@ -1609,41 +1609,41 @@ public class PrenotazionePersistenceImpl
 			closeSession(session);
 		}
 
-		if (prenotazione != null) {
-			clearCache(prenotazione);
+		if (prenotazioni != null) {
+			clearCache(prenotazioni);
 		}
 
-		return prenotazione;
+		return prenotazioni;
 	}
 
 	@Override
-	public Prenotazione updateImpl(Prenotazione prenotazione) {
-		boolean isNew = prenotazione.isNew();
+	public Prenotazioni updateImpl(Prenotazioni prenotazioni) {
+		boolean isNew = prenotazioni.isNew();
 
-		if (!(prenotazione instanceof PrenotazioneModelImpl)) {
+		if (!(prenotazioni instanceof PrenotazioniModelImpl)) {
 			InvocationHandler invocationHandler = null;
 
-			if (ProxyUtil.isProxyClass(prenotazione.getClass())) {
+			if (ProxyUtil.isProxyClass(prenotazioni.getClass())) {
 				invocationHandler = ProxyUtil.getInvocationHandler(
-					prenotazione);
+					prenotazioni);
 
 				throw new IllegalArgumentException(
-					"Implement ModelWrapper in prenotazione proxy " +
+					"Implement ModelWrapper in prenotazioni proxy " +
 						invocationHandler.getClass());
 			}
 
 			throw new IllegalArgumentException(
-				"Implement ModelWrapper in custom Prenotazione implementation " +
-					prenotazione.getClass());
+				"Implement ModelWrapper in custom Prenotazioni implementation " +
+					prenotazioni.getClass());
 		}
 
-		PrenotazioneModelImpl prenotazioneModelImpl =
-			(PrenotazioneModelImpl)prenotazione;
+		PrenotazioniModelImpl prenotazioniModelImpl =
+			(PrenotazioniModelImpl)prenotazioni;
 
-		if (Validator.isNull(prenotazione.getUuid())) {
+		if (Validator.isNull(prenotazioni.getUuid())) {
 			String uuid = PortalUUIDUtil.generate();
 
-			prenotazione.setUuid(uuid);
+			prenotazioni.setUuid(uuid);
 		}
 
 		ServiceContext serviceContext =
@@ -1651,21 +1651,21 @@ public class PrenotazionePersistenceImpl
 
 		Date date = new Date();
 
-		if (isNew && (prenotazione.getCreateDate() == null)) {
+		if (isNew && (prenotazioni.getCreateDate() == null)) {
 			if (serviceContext == null) {
-				prenotazione.setCreateDate(date);
+				prenotazioni.setCreateDate(date);
 			}
 			else {
-				prenotazione.setCreateDate(serviceContext.getCreateDate(date));
+				prenotazioni.setCreateDate(serviceContext.getCreateDate(date));
 			}
 		}
 
-		if (!prenotazioneModelImpl.hasSetModifiedDate()) {
+		if (!prenotazioniModelImpl.hasSetModifiedDate()) {
 			if (serviceContext == null) {
-				prenotazione.setModifiedDate(date);
+				prenotazioni.setModifiedDate(date);
 			}
 			else {
-				prenotazione.setModifiedDate(
+				prenotazioni.setModifiedDate(
 					serviceContext.getModifiedDate(date));
 			}
 		}
@@ -1676,10 +1676,10 @@ public class PrenotazionePersistenceImpl
 			session = openSession();
 
 			if (isNew) {
-				session.save(prenotazione);
+				session.save(prenotazioni);
 			}
 			else {
-				prenotazione = (Prenotazione)session.merge(prenotazione);
+				prenotazioni = (Prenotazioni)session.merge(prenotazioni);
 			}
 		}
 		catch (Exception exception) {
@@ -1690,130 +1690,130 @@ public class PrenotazionePersistenceImpl
 		}
 
 		entityCache.putResult(
-			PrenotazioneImpl.class, prenotazioneModelImpl, false, true);
+			PrenotazioniImpl.class, prenotazioniModelImpl, false, true);
 
-		cacheUniqueFindersCache(prenotazioneModelImpl);
+		cacheUniqueFindersCache(prenotazioniModelImpl);
 
 		if (isNew) {
-			prenotazione.setNew(false);
+			prenotazioni.setNew(false);
 		}
 
-		prenotazione.resetOriginalValues();
+		prenotazioni.resetOriginalValues();
 
-		return prenotazione;
+		return prenotazioni;
 	}
 
 	/**
-	 * Returns the prenotazione with the primary key or throws a <code>com.liferay.portal.kernel.exception.NoSuchModelException</code> if it could not be found.
+	 * Returns the prenotazioni with the primary key or throws a <code>com.liferay.portal.kernel.exception.NoSuchModelException</code> if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the prenotazione
-	 * @return the prenotazione
-	 * @throws NoSuchPrenotazioneException if a prenotazione with the primary key could not be found
+	 * @param primaryKey the primary key of the prenotazioni
+	 * @return the prenotazioni
+	 * @throws NoSuchPrenotazioniException if a prenotazioni with the primary key could not be found
 	 */
 	@Override
-	public Prenotazione findByPrimaryKey(Serializable primaryKey)
-		throws NoSuchPrenotazioneException {
+	public Prenotazioni findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchPrenotazioniException {
 
-		Prenotazione prenotazione = fetchByPrimaryKey(primaryKey);
+		Prenotazioni prenotazioni = fetchByPrimaryKey(primaryKey);
 
-		if (prenotazione == null) {
+		if (prenotazioni == null) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
-			throw new NoSuchPrenotazioneException(
+			throw new NoSuchPrenotazioniException(
 				_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 		}
 
-		return prenotazione;
+		return prenotazioni;
 	}
 
 	/**
-	 * Returns the prenotazione with the primary key or throws a <code>NoSuchPrenotazioneException</code> if it could not be found.
+	 * Returns the prenotazioni with the primary key or throws a <code>NoSuchPrenotazioniException</code> if it could not be found.
 	 *
-	 * @param prenotazioneId the primary key of the prenotazione
-	 * @return the prenotazione
-	 * @throws NoSuchPrenotazioneException if a prenotazione with the primary key could not be found
+	 * @param prenotazioneId the primary key of the prenotazioni
+	 * @return the prenotazioni
+	 * @throws NoSuchPrenotazioniException if a prenotazioni with the primary key could not be found
 	 */
 	@Override
-	public Prenotazione findByPrimaryKey(long prenotazioneId)
-		throws NoSuchPrenotazioneException {
+	public Prenotazioni findByPrimaryKey(long prenotazioneId)
+		throws NoSuchPrenotazioniException {
 
 		return findByPrimaryKey((Serializable)prenotazioneId);
 	}
 
 	/**
-	 * Returns the prenotazione with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the prenotazioni with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param prenotazioneId the primary key of the prenotazione
-	 * @return the prenotazione, or <code>null</code> if a prenotazione with the primary key could not be found
+	 * @param prenotazioneId the primary key of the prenotazioni
+	 * @return the prenotazioni, or <code>null</code> if a prenotazioni with the primary key could not be found
 	 */
 	@Override
-	public Prenotazione fetchByPrimaryKey(long prenotazioneId) {
+	public Prenotazioni fetchByPrimaryKey(long prenotazioneId) {
 		return fetchByPrimaryKey((Serializable)prenotazioneId);
 	}
 
 	/**
-	 * Returns all the prenotaziones.
+	 * Returns all the prenotazionis.
 	 *
-	 * @return the prenotaziones
+	 * @return the prenotazionis
 	 */
 	@Override
-	public List<Prenotazione> findAll() {
+	public List<Prenotazioni> findAll() {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the prenotaziones.
+	 * Returns a range of all the prenotazionis.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>PrenotazioneModelImpl</code>.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>PrenotazioniModelImpl</code>.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of prenotaziones
-	 * @param end the upper bound of the range of prenotaziones (not inclusive)
-	 * @return the range of prenotaziones
+	 * @param start the lower bound of the range of prenotazionis
+	 * @param end the upper bound of the range of prenotazionis (not inclusive)
+	 * @return the range of prenotazionis
 	 */
 	@Override
-	public List<Prenotazione> findAll(int start, int end) {
+	public List<Prenotazioni> findAll(int start, int end) {
 		return findAll(start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the prenotaziones.
+	 * Returns an ordered range of all the prenotazionis.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>PrenotazioneModelImpl</code>.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>PrenotazioniModelImpl</code>.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of prenotaziones
-	 * @param end the upper bound of the range of prenotaziones (not inclusive)
+	 * @param start the lower bound of the range of prenotazionis
+	 * @param end the upper bound of the range of prenotazionis (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of prenotaziones
+	 * @return the ordered range of prenotazionis
 	 */
 	@Override
-	public List<Prenotazione> findAll(
-		int start, int end, OrderByComparator<Prenotazione> orderByComparator) {
+	public List<Prenotazioni> findAll(
+		int start, int end, OrderByComparator<Prenotazioni> orderByComparator) {
 
 		return findAll(start, end, orderByComparator, true);
 	}
 
 	/**
-	 * Returns an ordered range of all the prenotaziones.
+	 * Returns an ordered range of all the prenotazionis.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>PrenotazioneModelImpl</code>.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>PrenotazioniModelImpl</code>.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of prenotaziones
-	 * @param end the upper bound of the range of prenotaziones (not inclusive)
+	 * @param start the lower bound of the range of prenotazionis
+	 * @param end the upper bound of the range of prenotazionis (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @param useFinderCache whether to use the finder cache
-	 * @return the ordered range of prenotaziones
+	 * @return the ordered range of prenotazionis
 	 */
 	@Override
-	public List<Prenotazione> findAll(
-		int start, int end, OrderByComparator<Prenotazione> orderByComparator,
+	public List<Prenotazioni> findAll(
+		int start, int end, OrderByComparator<Prenotazioni> orderByComparator,
 		boolean useFinderCache) {
 
 		FinderPath finderPath = null;
@@ -1832,10 +1832,10 @@ public class PrenotazionePersistenceImpl
 			finderArgs = new Object[] {start, end, orderByComparator};
 		}
 
-		List<Prenotazione> list = null;
+		List<Prenotazioni> list = null;
 
 		if (useFinderCache) {
-			list = (List<Prenotazione>)finderCache.getResult(
+			list = (List<Prenotazioni>)finderCache.getResult(
 				finderPath, finderArgs, this);
 		}
 
@@ -1847,7 +1847,7 @@ public class PrenotazionePersistenceImpl
 				sb = new StringBundler(
 					2 + (orderByComparator.getOrderByFields().length * 2));
 
-				sb.append(_SQL_SELECT_PRENOTAZIONE);
+				sb.append(_SQL_SELECT_PRENOTAZIONI);
 
 				appendOrderByComparator(
 					sb, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
@@ -1855,9 +1855,9 @@ public class PrenotazionePersistenceImpl
 				sql = sb.toString();
 			}
 			else {
-				sql = _SQL_SELECT_PRENOTAZIONE;
+				sql = _SQL_SELECT_PRENOTAZIONI;
 
-				sql = sql.concat(PrenotazioneModelImpl.ORDER_BY_JPQL);
+				sql = sql.concat(PrenotazioniModelImpl.ORDER_BY_JPQL);
 			}
 
 			Session session = null;
@@ -1867,7 +1867,7 @@ public class PrenotazionePersistenceImpl
 
 				Query query = session.createQuery(sql);
 
-				list = (List<Prenotazione>)QueryUtil.list(
+				list = (List<Prenotazioni>)QueryUtil.list(
 					query, getDialect(), start, end);
 
 				cacheResult(list);
@@ -1888,20 +1888,20 @@ public class PrenotazionePersistenceImpl
 	}
 
 	/**
-	 * Removes all the prenotaziones from the database.
+	 * Removes all the prenotazionis from the database.
 	 *
 	 */
 	@Override
 	public void removeAll() {
-		for (Prenotazione prenotazione : findAll()) {
-			remove(prenotazione);
+		for (Prenotazioni prenotazioni : findAll()) {
+			remove(prenotazioni);
 		}
 	}
 
 	/**
-	 * Returns the number of prenotaziones.
+	 * Returns the number of prenotazionis.
 	 *
-	 * @return the number of prenotaziones
+	 * @return the number of prenotazionis
 	 */
 	@Override
 	public int countAll() {
@@ -1914,7 +1914,7 @@ public class PrenotazionePersistenceImpl
 			try {
 				session = openSession();
 
-				Query query = session.createQuery(_SQL_COUNT_PRENOTAZIONE);
+				Query query = session.createQuery(_SQL_COUNT_PRENOTAZIONI);
 
 				count = (Long)query.uniqueResult();
 
@@ -1949,16 +1949,16 @@ public class PrenotazionePersistenceImpl
 
 	@Override
 	protected String getSelectSQL() {
-		return _SQL_SELECT_PRENOTAZIONE;
+		return _SQL_SELECT_PRENOTAZIONI;
 	}
 
 	@Override
 	protected Map<String, Integer> getTableColumnsMap() {
-		return PrenotazioneModelImpl.TABLE_COLUMNS_MAP;
+		return PrenotazioniModelImpl.TABLE_COLUMNS_MAP;
 	}
 
 	/**
-	 * Initializes the prenotazione persistence.
+	 * Initializes the prenotazioni persistence.
 	 */
 	@Activate
 	public void activate() {
@@ -2019,14 +2019,14 @@ public class PrenotazionePersistenceImpl
 			new String[] {String.class.getName(), Long.class.getName()},
 			new String[] {"uuid_", "companyId"}, false);
 
-		PrenotazioneUtil.setPersistence(this);
+		PrenotazioniUtil.setPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
-		PrenotazioneUtil.setPersistence(null);
+		PrenotazioniUtil.setPersistence(null);
 
-		entityCache.removeCache(PrenotazioneImpl.class.getName());
+		entityCache.removeCache(PrenotazioniImpl.class.getName());
 	}
 
 	@Override
@@ -2060,28 +2060,28 @@ public class PrenotazionePersistenceImpl
 	@Reference
 	protected FinderCache finderCache;
 
-	private static final String _SQL_SELECT_PRENOTAZIONE =
-		"SELECT prenotazione FROM Prenotazione prenotazione";
+	private static final String _SQL_SELECT_PRENOTAZIONI =
+		"SELECT prenotazioni FROM Prenotazioni prenotazioni";
 
-	private static final String _SQL_SELECT_PRENOTAZIONE_WHERE =
-		"SELECT prenotazione FROM Prenotazione prenotazione WHERE ";
+	private static final String _SQL_SELECT_PRENOTAZIONI_WHERE =
+		"SELECT prenotazioni FROM Prenotazioni prenotazioni WHERE ";
 
-	private static final String _SQL_COUNT_PRENOTAZIONE =
-		"SELECT COUNT(prenotazione) FROM Prenotazione prenotazione";
+	private static final String _SQL_COUNT_PRENOTAZIONI =
+		"SELECT COUNT(prenotazioni) FROM Prenotazioni prenotazioni";
 
-	private static final String _SQL_COUNT_PRENOTAZIONE_WHERE =
-		"SELECT COUNT(prenotazione) FROM Prenotazione prenotazione WHERE ";
+	private static final String _SQL_COUNT_PRENOTAZIONI_WHERE =
+		"SELECT COUNT(prenotazioni) FROM Prenotazioni prenotazioni WHERE ";
 
-	private static final String _ORDER_BY_ENTITY_ALIAS = "prenotazione.";
+	private static final String _ORDER_BY_ENTITY_ALIAS = "prenotazioni.";
 
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY =
-		"No Prenotazione exists with the primary key ";
+		"No Prenotazioni exists with the primary key ";
 
 	private static final String _NO_SUCH_ENTITY_WITH_KEY =
-		"No Prenotazione exists with the key {";
+		"No Prenotazioni exists with the key {";
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		PrenotazionePersistenceImpl.class);
+		PrenotazioniPersistenceImpl.class);
 
 	private static final Set<String> _badColumnNames = SetUtil.fromArray(
 		new String[] {"uuid", "data"});

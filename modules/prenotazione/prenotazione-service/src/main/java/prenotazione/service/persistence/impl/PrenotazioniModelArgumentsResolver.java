@@ -14,24 +14,24 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.osgi.service.component.annotations.Component;
 
-import prenotazione.model.PrenotazioneTable;
-import prenotazione.model.impl.PrenotazioneImpl;
-import prenotazione.model.impl.PrenotazioneModelImpl;
+import prenotazione.model.PrenotazioniTable;
+import prenotazione.model.impl.PrenotazioniImpl;
+import prenotazione.model.impl.PrenotazioniModelImpl;
 
 /**
- * The arguments resolver class for retrieving value from Prenotazione.
+ * The arguments resolver class for retrieving value from Prenotazioni.
  *
  * @author Brian Wing Shun Chan
  * @generated
  */
 @Component(
 	property = {
-		"class.name=prenotazione.model.impl.PrenotazioneImpl",
-		"table.name=Prenotazione"
+		"class.name=prenotazione.model.impl.PrenotazioniImpl",
+		"table.name=Prenotazioni"
 	},
 	service = ArgumentsResolver.class
 )
-public class PrenotazioneModelArgumentsResolver implements ArgumentsResolver {
+public class PrenotazioniModelArgumentsResolver implements ArgumentsResolver {
 
 	@Override
 	public Object[] getArguments(
@@ -48,13 +48,13 @@ public class PrenotazioneModelArgumentsResolver implements ArgumentsResolver {
 			return null;
 		}
 
-		PrenotazioneModelImpl prenotazioneModelImpl =
-			(PrenotazioneModelImpl)baseModel;
+		PrenotazioniModelImpl prenotazioniModelImpl =
+			(PrenotazioniModelImpl)baseModel;
 
-		long columnBitmask = prenotazioneModelImpl.getColumnBitmask();
+		long columnBitmask = prenotazioniModelImpl.getColumnBitmask();
 
 		if (!checkColumn || (columnBitmask == 0)) {
-			return _getValue(prenotazioneModelImpl, columnNames, original);
+			return _getValue(prenotazioniModelImpl, columnNames, original);
 		}
 
 		Long finderPathColumnBitmask = _finderPathColumnBitmasksCache.get(
@@ -65,7 +65,7 @@ public class PrenotazioneModelArgumentsResolver implements ArgumentsResolver {
 
 			for (String columnName : columnNames) {
 				finderPathColumnBitmask |=
-					prenotazioneModelImpl.getColumnBitmask(columnName);
+					prenotazioniModelImpl.getColumnBitmask(columnName);
 			}
 
 			_finderPathColumnBitmasksCache.put(
@@ -73,7 +73,7 @@ public class PrenotazioneModelArgumentsResolver implements ArgumentsResolver {
 		}
 
 		if ((columnBitmask & finderPathColumnBitmask) != 0) {
-			return _getValue(prenotazioneModelImpl, columnNames, original);
+			return _getValue(prenotazioniModelImpl, columnNames, original);
 		}
 
 		return null;
@@ -81,16 +81,16 @@ public class PrenotazioneModelArgumentsResolver implements ArgumentsResolver {
 
 	@Override
 	public String getClassName() {
-		return PrenotazioneImpl.class.getName();
+		return PrenotazioniImpl.class.getName();
 	}
 
 	@Override
 	public String getTableName() {
-		return PrenotazioneTable.INSTANCE.getTableName();
+		return PrenotazioniTable.INSTANCE.getTableName();
 	}
 
 	private static Object[] _getValue(
-		PrenotazioneModelImpl prenotazioneModelImpl, String[] columnNames,
+		PrenotazioniModelImpl prenotazioniModelImpl, String[] columnNames,
 		boolean original) {
 
 		Object[] arguments = new Object[columnNames.length];
@@ -99,11 +99,11 @@ public class PrenotazioneModelArgumentsResolver implements ArgumentsResolver {
 			String columnName = columnNames[i];
 
 			if (original) {
-				arguments[i] = prenotazioneModelImpl.getColumnOriginalValue(
+				arguments[i] = prenotazioniModelImpl.getColumnOriginalValue(
 					columnName);
 			}
 			else {
-				arguments[i] = prenotazioneModelImpl.getColumnValue(columnName);
+				arguments[i] = prenotazioniModelImpl.getColumnValue(columnName);
 			}
 		}
 

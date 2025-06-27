@@ -1,14 +1,15 @@
 package com.example.portlet.actioncommand;
 
 import com.example.constants.HelloWorldPortletKeys;
+import com.liferay.counter.kernel.service.CounterLocalService;
+import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.counter.kernel.service.CounterLocalService;
 
-import java.text.SimpleDateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.portlet.ActionRequest;
@@ -18,8 +19,8 @@ import javax.portlet.PortletException;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
-import prenotazione.model.Prenotazione;
-import prenotazione.service.PrenotazioneLocalService;
+import prenotazione.model.Prenotazioni;
+import prenotazione.service.PrenotazioniLocalService;
 
 @Component(
     immediate = true,
@@ -32,7 +33,7 @@ import prenotazione.service.PrenotazioneLocalService;
 public class PrenotazioneActionCommand implements MVCActionCommand {
 
     @Reference
-    private PrenotazioneLocalService prenotazioneLocalService;
+    private PrenotazioniLocalService prenotazioneLocalService;
 
     @Reference
     private CounterLocalService counterLocalService;
@@ -53,18 +54,12 @@ public class PrenotazioneActionCommand implements MVCActionCommand {
         System.out.println("ID postazione: " + postazioneId);
 
         try {
-            ServiceContext serviceContext = ServiceContextFactory.getInstance(Prenotazione.class.getName(), request);
+            ServiceContext serviceContext = ServiceContextFactory.getInstance(Prenotazioni.class.getName(), request);
             Date data = _toDate(dataStr);
-
-            prenotazioneLocalService.aggiungiPrenotazione(
-            	    serviceContext.getUserId(),
-            	    email,
-            	    data,
-            	    oraInizio,
-            	    oraFine,
-            	    String.valueOf(postazioneId),
-            	    serviceContext
-            	);
+            
+           
+            // crea la prenotazione
+            
 
             System.out.println("Prenotazione salvata con successo!");
 

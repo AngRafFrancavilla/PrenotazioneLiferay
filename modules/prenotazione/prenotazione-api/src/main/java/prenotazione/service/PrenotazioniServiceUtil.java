@@ -8,23 +8,23 @@ package prenotazione.service;
 import com.liferay.portal.kernel.module.service.Snapshot;
 
 /**
- * Provides the remote service utility for Prenotazione. This utility wraps
- * <code>prenotazione.service.impl.PrenotazioneServiceImpl</code> and is an
+ * Provides the remote service utility for Prenotazioni. This utility wraps
+ * <code>prenotazione.service.impl.PrenotazioniServiceImpl</code> and is an
  * access point for service operations in application layer code running on a
  * remote server. Methods of this service are expected to have security checks
  * based on the propagated JAAS credentials because this service can be
  * accessed remotely.
  *
  * @author Brian Wing Shun Chan
- * @see PrenotazioneService
+ * @see PrenotazioniService
  * @generated
  */
-public class PrenotazioneServiceUtil {
+public class PrenotazioniServiceUtil {
 
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this class directly. Add custom service methods to <code>prenotazione.service.impl.PrenotazioneServiceImpl</code> and rerun ServiceBuilder to regenerate this class.
+	 * Never modify this class directly. Add custom service methods to <code>prenotazione.service.impl.PrenotazioniServiceImpl</code> and rerun ServiceBuilder to regenerate this class.
 	 */
 
 	/**
@@ -36,12 +36,12 @@ public class PrenotazioneServiceUtil {
 		return getService().getOSGiServiceIdentifier();
 	}
 
-	public static PrenotazioneService getService() {
+	public static PrenotazioniService getService() {
 		return _serviceSnapshot.get();
 	}
 
-	private static final Snapshot<PrenotazioneService> _serviceSnapshot =
+	private static final Snapshot<PrenotazioniService> _serviceSnapshot =
 		new Snapshot<>(
-			PrenotazioneServiceUtil.class, PrenotazioneService.class);
+			PrenotazioniServiceUtil.class, PrenotazioniService.class);
 
 }

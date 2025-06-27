@@ -8,5 +8,5 @@ package prenotazione.model.impl;
 /**
  * @author Brian Wing Shun Chan
  */
-public class PrenotazioneImpl extends PrenotazioneBaseImpl {
+public class PrenotazioniImpl extends PrenotazioniBaseImpl {
 }

@@ -9,17 +9,17 @@ import com.liferay.portal.aop.AopService;
 
 import org.osgi.service.component.annotations.Component;
 
-import prenotazione.service.base.PrenotazioneServiceBaseImpl;
+import prenotazione.service.base.PrenotazioniServiceBaseImpl;
 
 /**
  * @author Brian Wing Shun Chan
  */
 @Component(
 	property = {
-		"json.web.service.context.name=pre",
-		"json.web.service.context.path=Prenotazione"
+		"json.web.service.context.name=",
+		"json.web.service.context.path=Prenotazioni"
 	},
 	service = AopService.class
 )
-public class PrenotazioneServiceImpl extends PrenotazioneServiceBaseImpl {
+public class PrenotazioniServiceImpl extends PrenotazioniServiceBaseImpl {
 }

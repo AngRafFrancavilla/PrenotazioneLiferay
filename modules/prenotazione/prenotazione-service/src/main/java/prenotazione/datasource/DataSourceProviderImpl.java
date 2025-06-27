@@ -11,9 +11,9 @@ import com.liferay.portal.util.PropsUtil;
 @Component(
     immediate = true,
     service = DataSourceProvider.class,
-    		property = {
-    		        "data.source.name=prenotazioniDataSource"
-    		    }
+	property = {
+        "data.source.name=prenotazioniDataSource"
+    }
 )
 public class DataSourceProviderImpl implements DataSourceProvider {
 	 
@@ -24,7 +24,7 @@ public class DataSourceProviderImpl implements DataSourceProvider {
  
 		try {
 			
-			dataSource = DataSourceFactoryUtil.initDataSource(PropsUtil.getProperties("jdbc.prenotazioni.jndi.name", true));
+			dataSource = DataSourceFactoryUtil.initDataSource(PropsUtil.getProperties("jdbc.prenotazioni.jndi.name.", true));
 		}
 		catch (Exception e) {
 			e.printStackTrace();

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 
 <model-hints>
-	<model name="prenotazione.model.Prenotazione">
+	<model name="prenotazione.model.Prenotazioni">
 		<field name="uuid" type="String" />
 		<field name="prenotazioneId" type="long" />
 		<field name="groupId" type="long" />

@@ -7,7 +7,7 @@ package prenotazione.service.http;
 
 /**
  * Provides the HTTP utility for the
- * <code>prenotazione.service.PrenotazioneServiceUtil</code> service
+ * <code>prenotazione.service.PrenotazioniServiceUtil</code> service
  * utility. The
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it requires an additional
@@ -31,5 +31,5 @@ package prenotazione.service.http;
  * @author Brian Wing Shun Chan
  * @generated
  */
-public class PrenotazioneServiceHttp {
+public class PrenotazioniServiceHttp {
 }

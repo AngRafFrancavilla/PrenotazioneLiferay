@@ -15,19 +15,19 @@ import java.util.Map;
 
 /**
  * <p>
- * This class is a wrapper for {@link Prenotazione}.
+ * This class is a wrapper for {@link Prenotazioni}.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see Prenotazione
+ * @see Prenotazioni
  * @generated
  */
-public class PrenotazioneWrapper
-	extends BaseModelWrapper<Prenotazione>
-	implements ModelWrapper<Prenotazione>, Prenotazione {
+public class PrenotazioniWrapper
+	extends BaseModelWrapper<Prenotazioni>
+	implements ModelWrapper<Prenotazioni>, Prenotazioni {
 
-	public PrenotazioneWrapper(Prenotazione prenotazione) {
-		super(prenotazione);
+	public PrenotazioniWrapper(Prenotazioni prenotazioni) {
+		super(prenotazioni);
 	}
 
 	@Override
@@ -133,14 +133,14 @@ public class PrenotazioneWrapper
 	}
 
 	@Override
-	public Prenotazione cloneWithOriginalValues() {
+	public Prenotazioni cloneWithOriginalValues() {
 		return wrap(model.cloneWithOriginalValues());
 	}
 
 	/**
-	 * Returns the company ID of this prenotazione.
+	 * Returns the company ID of this prenotazioni.
 	 *
-	 * @return the company ID of this prenotazione
+	 * @return the company ID of this prenotazioni
 	 */
 	@Override
 	public long getCompanyId() {
@@ -148,9 +148,9 @@ public class PrenotazioneWrapper
 	}
 
 	/**
-	 * Returns the create date of this prenotazione.
+	 * Returns the create date of this prenotazioni.
 	 *
-	 * @return the create date of this prenotazione
+	 * @return the create date of this prenotazioni
 	 */
 	@Override
 	public Date getCreateDate() {
@@ -158,9 +158,9 @@ public class PrenotazioneWrapper
 	}
 
 	/**
-	 * Returns the data of this prenotazione.
+	 * Returns the data of this prenotazioni.
 	 *
-	 * @return the data of this prenotazione
+	 * @return the data of this prenotazioni
 	 */
 	@Override
 	public Date getData() {
@@ -168,9 +168,9 @@ public class PrenotazioneWrapper
 	}
 
 	/**
-	 * Returns the email of this prenotazione.
+	 * Returns the email of this prenotazioni.
 	 *
-	 * @return the email of this prenotazione
+	 * @return the email of this prenotazioni
 	 */
 	@Override
 	public String getEmail() {
@@ -178,9 +178,9 @@ public class PrenotazioneWrapper
 	}
 
 	/**
-	 * Returns the group ID of this prenotazione.
+	 * Returns the group ID of this prenotazioni.
 	 *
-	 * @return the group ID of this prenotazione
+	 * @return the group ID of this prenotazioni
 	 */
 	@Override
 	public long getGroupId() {
@@ -188,9 +188,9 @@ public class PrenotazioneWrapper
 	}
 
 	/**
-	 * Returns the modified date of this prenotazione.
+	 * Returns the modified date of this prenotazioni.
 	 *
-	 * @return the modified date of this prenotazione
+	 * @return the modified date of this prenotazioni
 	 */
 	@Override
 	public Date getModifiedDate() {
@@ -198,9 +198,9 @@ public class PrenotazioneWrapper
 	}
 
 	/**
-	 * Returns the ora fine of this prenotazione.
+	 * Returns the ora fine of this prenotazioni.
 	 *
-	 * @return the ora fine of this prenotazione
+	 * @return the ora fine of this prenotazioni
 	 */
 	@Override
 	public String getOraFine() {
@@ -208,9 +208,9 @@ public class PrenotazioneWrapper
 	}
 
 	/**
-	 * Returns the ora inizio of this prenotazione.
+	 * Returns the ora inizio of this prenotazioni.
 	 *
-	 * @return the ora inizio of this prenotazione
+	 * @return the ora inizio of this prenotazioni
 	 */
 	@Override
 	public String getOraInizio() {
@@ -218,9 +218,9 @@ public class PrenotazioneWrapper
 	}
 
 	/**
-	 * Returns the postazione ID of this prenotazione.
+	 * Returns the postazione ID of this prenotazioni.
 	 *
-	 * @return the postazione ID of this prenotazione
+	 * @return the postazione ID of this prenotazioni
 	 */
 	@Override
 	public String getPostazioneId() {
@@ -228,9 +228,9 @@ public class PrenotazioneWrapper
 	}
 
 	/**
-	 * Returns the prenotazione ID of this prenotazione.
+	 * Returns the prenotazione ID of this prenotazioni.
 	 *
-	 * @return the prenotazione ID of this prenotazione
+	 * @return the prenotazione ID of this prenotazioni
 	 */
 	@Override
 	public long getPrenotazioneId() {
@@ -238,9 +238,9 @@ public class PrenotazioneWrapper
 	}
 
 	/**
-	 * Returns the primary key of this prenotazione.
+	 * Returns the primary key of this prenotazioni.
 	 *
-	 * @return the primary key of this prenotazione
+	 * @return the primary key of this prenotazioni
 	 */
 	@Override
 	public long getPrimaryKey() {
@@ -248,9 +248,9 @@ public class PrenotazioneWrapper
 	}
 
 	/**
-	 * Returns the user ID of this prenotazione.
+	 * Returns the user ID of this prenotazioni.
 	 *
-	 * @return the user ID of this prenotazione
+	 * @return the user ID of this prenotazioni
 	 */
 	@Override
 	public long getUserId() {
@@ -258,9 +258,9 @@ public class PrenotazioneWrapper
 	}
 
 	/**
-	 * Returns the user name of this prenotazione.
+	 * Returns the user name of this prenotazioni.
 	 *
-	 * @return the user name of this prenotazione
+	 * @return the user name of this prenotazioni
 	 */
 	@Override
 	public String getUserName() {
@@ -268,9 +268,9 @@ public class PrenotazioneWrapper
 	}
 
 	/**
-	 * Returns the user uuid of this prenotazione.
+	 * Returns the user uuid of this prenotazioni.
 	 *
-	 * @return the user uuid of this prenotazione
+	 * @return the user uuid of this prenotazioni
 	 */
 	@Override
 	public String getUserUuid() {
@@ -278,9 +278,9 @@ public class PrenotazioneWrapper
 	}
 
 	/**
-	 * Returns the uuid of this prenotazione.
+	 * Returns the uuid of this prenotazioni.
 	 *
-	 * @return the uuid of this prenotazione
+	 * @return the uuid of this prenotazioni
 	 */
 	@Override
 	public String getUuid() {
@@ -293,9 +293,9 @@ public class PrenotazioneWrapper
 	}
 
 	/**
-	 * Sets the company ID of this prenotazione.
+	 * Sets the company ID of this prenotazioni.
 	 *
-	 * @param companyId the company ID of this prenotazione
+	 * @param companyId the company ID of this prenotazioni
 	 */
 	@Override
 	public void setCompanyId(long companyId) {
@@ -303,9 +303,9 @@ public class PrenotazioneWrapper
 	}
 
 	/**
-	 * Sets the create date of this prenotazione.
+	 * Sets the create date of this prenotazioni.
 	 *
-	 * @param createDate the create date of this prenotazione
+	 * @param createDate the create date of this prenotazioni
 	 */
 	@Override
 	public void setCreateDate(Date createDate) {
@@ -313,9 +313,9 @@ public class PrenotazioneWrapper
 	}
 
 	/**
-	 * Sets the data of this prenotazione.
+	 * Sets the data of this prenotazioni.
 	 *
-	 * @param data the data of this prenotazione
+	 * @param data the data of this prenotazioni
 	 */
 	@Override
 	public void setData(Date data) {
@@ -323,9 +323,9 @@ public class PrenotazioneWrapper
 	}
 
 	/**
-	 * Sets the email of this prenotazione.
+	 * Sets the email of this prenotazioni.
 	 *
-	 * @param email the email of this prenotazione
+	 * @param email the email of this prenotazioni
 	 */
 	@Override
 	public void setEmail(String email) {
@@ -333,9 +333,9 @@ public class PrenotazioneWrapper
 	}
 
 	/**
-	 * Sets the group ID of this prenotazione.
+	 * Sets the group ID of this prenotazioni.
 	 *
-	 * @param groupId the group ID of this prenotazione
+	 * @param groupId the group ID of this prenotazioni
 	 */
 	@Override
 	public void setGroupId(long groupId) {
@@ -343,9 +343,9 @@ public class PrenotazioneWrapper
 	}
 
 	/**
-	 * Sets the modified date of this prenotazione.
+	 * Sets the modified date of this prenotazioni.
 	 *
-	 * @param modifiedDate the modified date of this prenotazione
+	 * @param modifiedDate the modified date of this prenotazioni
 	 */
 	@Override
 	public void setModifiedDate(Date modifiedDate) {
@@ -353,9 +353,9 @@ public class PrenotazioneWrapper
 	}
 
 	/**
-	 * Sets the ora fine of this prenotazione.
+	 * Sets the ora fine of this prenotazioni.
 	 *
-	 * @param oraFine the ora fine of this prenotazione
+	 * @param oraFine the ora fine of this prenotazioni
 	 */
 	@Override
 	public void setOraFine(String oraFine) {
@@ -363,9 +363,9 @@ public class PrenotazioneWrapper
 	}
 
 	/**
-	 * Sets the ora inizio of this prenotazione.
+	 * Sets the ora inizio of this prenotazioni.
 	 *
-	 * @param oraInizio the ora inizio of this prenotazione
+	 * @param oraInizio the ora inizio of this prenotazioni
 	 */
 	@Override
 	public void setOraInizio(String oraInizio) {
@@ -373,9 +373,9 @@ public class PrenotazioneWrapper
 	}
 
 	/**
-	 * Sets the postazione ID of this prenotazione.
+	 * Sets the postazione ID of this prenotazioni.
 	 *
-	 * @param postazioneId the postazione ID of this prenotazione
+	 * @param postazioneId the postazione ID of this prenotazioni
 	 */
 	@Override
 	public void setPostazioneId(String postazioneId) {
@@ -383,9 +383,9 @@ public class PrenotazioneWrapper
 	}
 
 	/**
-	 * Sets the prenotazione ID of this prenotazione.
+	 * Sets the prenotazione ID of this prenotazioni.
 	 *
-	 * @param prenotazioneId the prenotazione ID of this prenotazione
+	 * @param prenotazioneId the prenotazione ID of this prenotazioni
 	 */
 	@Override
 	public void setPrenotazioneId(long prenotazioneId) {
@@ -393,9 +393,9 @@ public class PrenotazioneWrapper
 	}
 
 	/**
-	 * Sets the primary key of this prenotazione.
+	 * Sets the primary key of this prenotazioni.
 	 *
-	 * @param primaryKey the primary key of this prenotazione
+	 * @param primaryKey the primary key of this prenotazioni
 	 */
 	@Override
 	public void setPrimaryKey(long primaryKey) {
@@ -403,9 +403,9 @@ public class PrenotazioneWrapper
 	}
 
 	/**
-	 * Sets the user ID of this prenotazione.
+	 * Sets the user ID of this prenotazioni.
 	 *
-	 * @param userId the user ID of this prenotazione
+	 * @param userId the user ID of this prenotazioni
 	 */
 	@Override
 	public void setUserId(long userId) {
@@ -413,9 +413,9 @@ public class PrenotazioneWrapper
 	}
 
 	/**
-	 * Sets the user name of this prenotazione.
+	 * Sets the user name of this prenotazioni.
 	 *
-	 * @param userName the user name of this prenotazione
+	 * @param userName the user name of this prenotazioni
 	 */
 	@Override
 	public void setUserName(String userName) {
@@ -423,9 +423,9 @@ public class PrenotazioneWrapper
 	}
 
 	/**
-	 * Sets the user uuid of this prenotazione.
+	 * Sets the user uuid of this prenotazioni.
 	 *
-	 * @param userUuid the user uuid of this prenotazione
+	 * @param userUuid the user uuid of this prenotazioni
 	 */
 	@Override
 	public void setUserUuid(String userUuid) {
@@ -433,9 +433,9 @@ public class PrenotazioneWrapper
 	}
 
 	/**
-	 * Sets the uuid of this prenotazione.
+	 * Sets the uuid of this prenotazioni.
 	 *
-	 * @param uuid the uuid of this prenotazione
+	 * @param uuid the uuid of this prenotazioni
 	 */
 	@Override
 	public void setUuid(String uuid) {
@@ -453,8 +453,8 @@ public class PrenotazioneWrapper
 	}
 
 	@Override
-	protected PrenotazioneWrapper wrap(Prenotazione prenotazione) {
-		return new PrenotazioneWrapper(prenotazione);
+	protected PrenotazioniWrapper wrap(Prenotazioni prenotazioni) {
+		return new PrenotazioniWrapper(prenotazioni);
 	}
 
 }

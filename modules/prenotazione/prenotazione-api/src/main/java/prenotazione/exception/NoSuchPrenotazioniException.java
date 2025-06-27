@@ -9,20 +9,20 @@ import com.liferay.portal.kernel.exception.NoSuchModelException;
 /**
  * @author Brian Wing Shun Chan
  */
-public class NoSuchPrenotazioneException extends NoSuchModelException {
+public class NoSuchPrenotazioniException extends NoSuchModelException {
 
-	public NoSuchPrenotazioneException() {
+	public NoSuchPrenotazioniException() {
 	}
 
-	public NoSuchPrenotazioneException(String msg) {
+	public NoSuchPrenotazioniException(String msg) {
 		super(msg);
 	}
 
-	public NoSuchPrenotazioneException(String msg, Throwable throwable) {
+	public NoSuchPrenotazioniException(String msg, Throwable throwable) {
 		super(msg, throwable);
 	}
 
-	public NoSuchPrenotazioneException(Throwable throwable) {
+	public NoSuchPrenotazioniException(Throwable throwable) {
 		super(throwable);
 	}
 

@@ -30,3 +30,4 @@ logs/
 *.war
 *.jar
  
+/.metadata/
