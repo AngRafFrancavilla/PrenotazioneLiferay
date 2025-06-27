@@ -58,7 +58,7 @@ public class PrenotazioneActionCommand implements MVCActionCommand {
             Date data = _toDate(dataStr);
             
            
-            // crea la prenotazione
+            // TODO crea la prenotazione
             
 
             System.out.println("Prenotazione salvata con successo!");
