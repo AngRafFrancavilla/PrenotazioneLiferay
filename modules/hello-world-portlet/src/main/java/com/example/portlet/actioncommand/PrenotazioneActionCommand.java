@@ -2,7 +2,6 @@ package com.example.portlet.actioncommand;
 
 import com.example.constants.HelloWorldPortletKeys;
 import com.liferay.counter.kernel.service.CounterLocalService;
-import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
@@ -56,10 +55,18 @@ public class PrenotazioneActionCommand implements MVCActionCommand {
         try {
             ServiceContext serviceContext = ServiceContextFactory.getInstance(Prenotazioni.class.getName(), request);
             Date data = _toDate(dataStr);
-            
-           
-            // TODO crea la prenotazione
-            
+
+            long prenotazioneId = counterLocalService.increment(Prenotazioni.class.getName());
+
+            Prenotazioni prenotazione = prenotazioneLocalService.createPrenotazioni(prenotazioneId);
+
+            prenotazione.setEmail(email);
+            prenotazione.setData(data);
+            prenotazione.setOraInizio(oraInizio);
+            prenotazione.setOraFine(oraFine);
+            prenotazione.setPostazioneId(String.valueOf(postazioneId));
+
+            prenotazioneLocalService.updatePrenotazioni(prenotazione);
 
             System.out.println("Prenotazione salvata con successo!");
 
@@ -71,7 +78,6 @@ public class PrenotazioneActionCommand implements MVCActionCommand {
 
         return true;
     }
-
 
     private Date _toDate(String yyyyMMdd) throws ParseException {
         return new SimpleDateFormat("yyyy-MM-dd").parse(yyyyMMdd);

@@ -4,11 +4,12 @@
 <service-builder package-path="prenotazione" dependency-injector="ds" auto-namespace-tables="false">
     <namespace></namespace>
 
-    <entity local-service="true" 
-    		name="Prenotazioni"
-    		remote-service="true"
-    		uuid="true"
-    		data-source="prenotazioniDataSource" >
+<entity local-service="true" 
+        name="Prenotazione"
+        table="prenotazioni"
+        remote-service="true"
+        uuid="true"
+        data-source="prenotazioniDataSource" >
     		
         <column name="prenotazioneId" primary="true" type="long" />
 

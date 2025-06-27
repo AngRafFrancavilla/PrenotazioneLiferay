@@ -12,6 +12,8 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.Session;
+import com.liferay.portal.kernel.test.ReflectionTestUtil;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.transaction.Propagation;
@@ -116,6 +118,8 @@ public class PrenotazionePersistenceTest {
 
 		Prenotazione newPrenotazione = _persistence.create(pk);
 
+		newPrenotazione.setUuid(RandomTestUtil.randomString());
+
 		newPrenotazione.setGroupId(RandomTestUtil.nextLong());
 
 		newPrenotazione.setCompanyId(RandomTestUtil.nextLong());
@@ -143,6 +147,8 @@ public class PrenotazionePersistenceTest {
 		Prenotazione existingPrenotazione = _persistence.findByPrimaryKey(
 			newPrenotazione.getPrimaryKey());
 
+		Assert.assertEquals(
+			existingPrenotazione.getUuid(), newPrenotazione.getUuid());
 		Assert.assertEquals(
 			existingPrenotazione.getPrenotazioneId(),
 			newPrenotazione.getPrenotazioneId());
@@ -177,6 +183,33 @@ public class PrenotazionePersistenceTest {
 	}
 
 	@Test
+	public void testCountByUuid() throws Exception {
+		_persistence.countByUuid("");
+
+		_persistence.countByUuid("null");
+
+		_persistence.countByUuid((String)null);
+	}
+
+	@Test
+	public void testCountByUUID_G() throws Exception {
+		_persistence.countByUUID_G("", RandomTestUtil.nextLong());
+
+		_persistence.countByUUID_G("null", 0L);
+
+		_persistence.countByUUID_G((String)null, 0L);
+	}
+
+	@Test
+	public void testCountByUuid_C() throws Exception {
+		_persistence.countByUuid_C("", RandomTestUtil.nextLong());
+
+		_persistence.countByUuid_C("null", 0L);
+
+		_persistence.countByUuid_C((String)null, 0L);
+	}
+
+	@Test
 	public void testFindByPrimaryKeyExisting() throws Exception {
 		Prenotazione newPrenotazione = addPrenotazione();
 
@@ -201,10 +234,10 @@ public class PrenotazionePersistenceTest {
 
 	protected OrderByComparator<Prenotazione> getOrderByComparator() {
 		return OrderByComparatorFactoryUtil.create(
-			"Prenotazione", "prenotazioneId", true, "groupId", true,
-			"companyId", true, "userId", true, "userName", true, "createDate",
-			true, "modifiedDate", true, "email", true, "data", true,
-			"oraInizio", true, "oraFine", true, "postazioneId", true);
+			"prenotazioni", "uuid", true, "prenotazioneId", true, "groupId",
+			true, "companyId", true, "userId", true, "userName", true,
+			"createDate", true, "modifiedDate", true, "email", true, "data",
+			true, "oraInizio", true, "oraFine", true, "postazioneId", true);
 	}
 
 	@Test
@@ -420,10 +453,75 @@ public class PrenotazionePersistenceTest {
 		Assert.assertEquals(0, result.size());
 	}
 
+	@Test
+	public void testResetOriginalValues() throws Exception {
+		Prenotazione newPrenotazione = addPrenotazione();
+
+		_persistence.clearCache();
+
+		_assertOriginalValues(
+			_persistence.findByPrimaryKey(newPrenotazione.getPrimaryKey()));
+	}
+
+	@Test
+	public void testResetOriginalValuesWithDynamicQueryLoadFromDatabase()
+		throws Exception {
+
+		_testResetOriginalValuesWithDynamicQuery(true);
+	}
+
+	@Test
+	public void testResetOriginalValuesWithDynamicQueryLoadFromSession()
+		throws Exception {
+
+		_testResetOriginalValuesWithDynamicQuery(false);
+	}
+
+	private void _testResetOriginalValuesWithDynamicQuery(boolean clearSession)
+		throws Exception {
+
+		Prenotazione newPrenotazione = addPrenotazione();
+
+		if (clearSession) {
+			Session session = _persistence.openSession();
+
+			session.flush();
+
+			session.clear();
+		}
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			Prenotazione.class, _dynamicQueryClassLoader);
+
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
+				"prenotazioneId", newPrenotazione.getPrenotazioneId()));
+
+		List<Prenotazione> result = _persistence.findWithDynamicQuery(
+			dynamicQuery);
+
+		_assertOriginalValues(result.get(0));
+	}
+
+	private void _assertOriginalValues(Prenotazione prenotazione) {
+		Assert.assertEquals(
+			prenotazione.getUuid(),
+			ReflectionTestUtil.invoke(
+				prenotazione, "getColumnOriginalValue",
+				new Class<?>[] {String.class}, "uuid_"));
+		Assert.assertEquals(
+			Long.valueOf(prenotazione.getGroupId()),
+			ReflectionTestUtil.<Long>invoke(
+				prenotazione, "getColumnOriginalValue",
+				new Class<?>[] {String.class}, "groupId"));
+	}
+
 	protected Prenotazione addPrenotazione() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
 		Prenotazione prenotazione = _persistence.create(pk);
+
+		prenotazione.setUuid(RandomTestUtil.randomString());
 
 		prenotazione.setGroupId(RandomTestUtil.nextLong());
 

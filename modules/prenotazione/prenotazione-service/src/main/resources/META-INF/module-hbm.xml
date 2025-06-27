@@ -2,8 +2,8 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping auto-import="false" default-lazy="false">
-	<import class="prenotazione.model.Prenotazioni" />
-	<class name="prenotazione.model.impl.PrenotazioniImpl" table="Prenotazioni">
+	<import class="prenotazione.model.Prenotazione" />
+	<class name="prenotazione.model.impl.PrenotazioneImpl" table="prenotazioni">
 		<id access="com.liferay.portal.dao.orm.hibernate.MethodPropertyAccessor" name="prenotazioneId" type="long">
 			<generator class="assigned" />
 		</id>
