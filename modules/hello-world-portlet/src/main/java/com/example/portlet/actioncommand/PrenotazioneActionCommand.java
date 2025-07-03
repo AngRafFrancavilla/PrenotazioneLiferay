@@ -3,8 +3,6 @@ package com.example.portlet.actioncommand;
 import com.example.constants.HelloWorldPortletKeys;
 import com.liferay.counter.kernel.service.CounterLocalService;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
-import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.util.ParamUtil;
 
 import java.text.ParseException;
@@ -18,8 +16,8 @@ import javax.portlet.PortletException;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
-import prenotazione.model.Prenotazioni;
-import prenotazione.service.PrenotazioniLocalService;
+import prenotazione.model.Prenotazione;
+import prenotazione.service.PrenotazioneLocalService;
 
 @Component(
     immediate = true,
@@ -32,7 +30,7 @@ import prenotazione.service.PrenotazioniLocalService;
 public class PrenotazioneActionCommand implements MVCActionCommand {
 
     @Reference
-    private PrenotazioniLocalService prenotazioneLocalService;
+    private PrenotazioneLocalService prenotazioneLocalService;
 
     @Reference
     private CounterLocalService counterLocalService;
@@ -53,12 +51,11 @@ public class PrenotazioneActionCommand implements MVCActionCommand {
         System.out.println("ID postazione: " + postazioneId);
 
         try {
-            ServiceContext serviceContext = ServiceContextFactory.getInstance(Prenotazioni.class.getName(), request);
             Date data = _toDate(dataStr);
 
-            long prenotazioneId = counterLocalService.increment(Prenotazioni.class.getName());
+            long prenotazioneId = counterLocalService.increment();
 
-            Prenotazioni prenotazione = prenotazioneLocalService.createPrenotazioni(prenotazioneId);
+            Prenotazione prenotazione = prenotazioneLocalService.createPrenotazione(prenotazioneId);
 
             prenotazione.setEmail(email);
             prenotazione.setData(data);
@@ -66,7 +63,7 @@ public class PrenotazioneActionCommand implements MVCActionCommand {
             prenotazione.setOraFine(oraFine);
             prenotazione.setPostazioneId(String.valueOf(postazioneId));
 
-            prenotazioneLocalService.updatePrenotazioni(prenotazione);
+            prenotazioneLocalService.addPrenotazione(prenotazione);
 
             System.out.println("Prenotazione salvata con successo!");
 
