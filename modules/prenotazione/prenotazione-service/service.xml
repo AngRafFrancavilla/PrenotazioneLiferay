@@ -1,31 +1,49 @@
 <?xml version="1.0"?>
-<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.4.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_4_0.dtd">
+<!DOCTYPE service-builder PUBLIC
+  "-//Liferay//DTD Service Builder 7.4.0//EN"
+  "http://www.liferay.com/dtd/liferay-service-builder_7_4_0.dtd">
 
-<service-builder package-path="prenotazione" dependency-injector="ds" auto-namespace-tables="false">
-    <namespace></namespace>
+<service-builder
+    package-path="prenotazione"
+    dependency-injector="ds"
+    auto-namespace-tables="false">
 
-<entity local-service="true" 
-        name="Prenotazione"
-        table="prenotazioni"
-        remote-service="true"
-        uuid="true"
-        data-source="prenotazioniDataSource" >
-    		
-        <column name="prenotazioneId" primary="true" type="long" />
+  <namespace></namespace>
 
-        <!-- Group and Audit -->
-        <column name="groupId" type="long" />
-        <column name="companyId" type="long" />
-        <column name="userId" type="long" />
-        <column name="userName" type="String" />
-        <column name="createDate" type="Date" />
-        <column name="modifiedDate" type="Date" />
+  <!-- Entità Prenotazione esistente -->
+  <entity
+      name="Prenotazione"
+      table="prenotazioni"
+      local-service="true"
+      remote-service="true"
+      uuid="true"
+      data-source="prenotazioniDataSource">
+    <column name="prenotazioneId" primary="true" type="long"/>
+    <!-- campi di audit -->
+    <column name="groupId"      type="long"/>
+    <column name="companyId"    type="long"/>
+    <column name="userId"       type="long"/>
+    <column name="userName"     type="String"/>
+    <column name="createDate"   type="Date"/>
+    <column name="modifiedDate" type="Date"/>
+    <!-- tuoi campi -->
+	<column name="email" type="String" />
+    <column name="data"        type="Date"    db-name="data"/>
+    <column name="oraInizio"   type="String"    db-name="ora_inizio"/>
+    <column name="oraFine"     type="String"    db-name="ora_fine"/>
+    <column name="postazioneId" type="String"   db-name="postazione_id"/>
+  </entity>
 
-        <!-- Campi prenotazione -->
-        <column name="email" type="String" />
-        <column name="data" type="Date" />
-        <column name="oraInizio" type="String" />
-        <column name="oraFine" type="String" />
-        <column name="postazioneId" type="String" />
-    </entity>
+  <!-- Nuova entità Postazione -->
+  <entity
+      name="Postazione"
+      table="postazioni"
+      local-service="true"
+      remote-service="false">
+
+    <column name="postazioneId" primary="true" type="long" db-name="id"/>
+    <column name="stanzaId"      type="long"   db-name="stanza_id"/>
+    <column name="nomePostazione" type="String" db-name="nome_postazione"/>
+  </entity>
+
 </service-builder>

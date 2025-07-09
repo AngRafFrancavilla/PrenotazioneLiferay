@@ -42,13 +42,13 @@ public class PrenotazioneTable extends BaseTable<PrenotazioneTable> {
 	public final Column<PrenotazioneTable, String> email = createColumn(
 		"email", String.class, Types.VARCHAR, Column.FLAG_DEFAULT);
 	public final Column<PrenotazioneTable, Date> data = createColumn(
-		"data_", Date.class, Types.TIMESTAMP, Column.FLAG_DEFAULT);
+		"data", Date.class, Types.TIMESTAMP, Column.FLAG_DEFAULT);
 	public final Column<PrenotazioneTable, String> oraInizio = createColumn(
-		"oraInizio", String.class, Types.VARCHAR, Column.FLAG_DEFAULT);
+		"ora_inizio", String.class, Types.VARCHAR, Column.FLAG_DEFAULT);
 	public final Column<PrenotazioneTable, String> oraFine = createColumn(
-		"oraFine", String.class, Types.VARCHAR, Column.FLAG_DEFAULT);
+		"ora_fine", String.class, Types.VARCHAR, Column.FLAG_DEFAULT);
 	public final Column<PrenotazioneTable, String> postazioneId = createColumn(
-		"postazioneId", String.class, Types.VARCHAR, Column.FLAG_DEFAULT);
+		"postazione_id", String.class, Types.VARCHAR, Column.FLAG_DEFAULT);
 
 	private PrenotazioneTable() {
 		super("prenotazioni", PrenotazioneTable::new);

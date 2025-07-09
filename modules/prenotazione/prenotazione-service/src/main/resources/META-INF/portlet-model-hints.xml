@@ -1,6 +1,11 @@
 <?xml version="1.0"?>
 
 <model-hints>
+	<model name="prenotazione.model.Postazione">
+		<field name="postazioneId" type="long" />
+		<field name="stanzaId" type="long" />
+		<field name="nomePostazione" type="String" />
+	</model>
 	<model name="prenotazione.model.Prenotazione">
 		<field name="uuid" type="String" />
 		<field name="prenotazioneId" type="long" />

@@ -25,6 +25,7 @@ import org.osgi.service.component.annotations.Reference;
 import prenotazione.model.Prenotazione;
 
 import prenotazione.service.PrenotazioneService;
+import prenotazione.service.persistence.PostazionePersistence;
 import prenotazione.service.persistence.PrenotazionePersistence;
 
 /**
@@ -109,6 +110,9 @@ public abstract class PrenotazioneServiceBaseImpl
 			throw new SystemException(exception);
 		}
 	}
+
+	@Reference
+	protected PostazionePersistence postazionePersistence;
 
 	@Reference
 	protected prenotazione.service.PrenotazioneLocalService

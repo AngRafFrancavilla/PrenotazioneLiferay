@@ -18,6 +18,8 @@ import org.osgi.service.component.annotations.Reference;
 
 import prenotazione.model.Prenotazione;
 import prenotazione.service.PrenotazioneLocalService;
+import com.liferay.portal.kernel.servlet.SessionErrors;
+
 
 @Component(
     immediate = true,
@@ -41,26 +43,53 @@ public class PrenotazioneActionCommand implements MVCActionCommand {
 
         String email = ParamUtil.getString(request, "email");
         String dataStr = ParamUtil.getString(request, "data");
-        String oraInizio = ParamUtil.getString(request, "oraInizio");
-        String oraFine = ParamUtil.getString(request, "oraFine");
+        String oraInizioStr = ParamUtil.getString(request, "oraInizio");
+        String oraFineStr = ParamUtil.getString(request, "oraFine");
         long postazioneId = ParamUtil.getLong(request, "postazioneId");
 
         System.out.println("Email: " + email);
         System.out.println("Data: " + dataStr);
-        System.out.println("Ora inizio: " + oraInizio + ", fine: " + oraFine);
+        System.out.println("Ora inizio: " + oraInizioStr + ", fine: " + oraFineStr);
         System.out.println("ID postazione: " + postazioneId);
 
         try {
-            Date data = _toDate(dataStr);
+            Date dataPrenotazione = _toDate(dataStr);
+            Date oggi = _toDate(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
 
+            if (dataPrenotazione.before(oggi)) {
+                throw new PortletException("La data selezionata è già passata.");
+            }
+
+            // Parsing orari
+            SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+            Date oraInizio = timeFormat.parse(oraInizioStr);
+            Date oraFine = timeFormat.parse(oraFineStr);
+            Date oraAttuale = timeFormat.parse(timeFormat.format(new Date()));
+
+            if (dataPrenotazione.before(oggi)) {
+                SessionErrors.add(request, "data-passata");
+                return false;
+            }
+
+            if (dataPrenotazione.equals(oggi) && oraInizio.before(oraAttuale)) {
+                SessionErrors.add(request, "ora-inizio-passata");
+                return false;
+            }
+
+            if (!oraFine.after(oraInizio)) {
+                SessionErrors.add(request, "ora-fine-non-valida");
+                return false;
+            }
+
+
+            // Creazione e salvataggio prenotazione
             long prenotazioneId = counterLocalService.increment();
-
             Prenotazione prenotazione = prenotazioneLocalService.createPrenotazione(prenotazioneId);
 
             prenotazione.setEmail(email);
-            prenotazione.setData(data);
-            prenotazione.setOraInizio(oraInizio);
-            prenotazione.setOraFine(oraFine);
+            prenotazione.setData(dataPrenotazione);
+            prenotazione.setOraInizio(oraInizioStr);
+            prenotazione.setOraFine(oraFineStr);
             prenotazione.setPostazioneId(String.valueOf(postazioneId));
 
             prenotazioneLocalService.addPrenotazione(prenotazione);
@@ -75,6 +104,7 @@ public class PrenotazioneActionCommand implements MVCActionCommand {
 
         return true;
     }
+
 
     private Date _toDate(String yyyyMMdd) throws ParseException {
         return new SimpleDateFormat("yyyy-MM-dd").parse(yyyyMMdd);

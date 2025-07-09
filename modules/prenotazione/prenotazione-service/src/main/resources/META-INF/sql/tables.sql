@@ -29,3 +29,9 @@ create table Prenotazione (
 	oraFine VARCHAR(75) null,
 	postazioneId VARCHAR(75) null
 );
+
+create table postazioni (
+	id LONG not null primary key,
+	stanza_id LONG,
+	nome_postazione VARCHAR(75) null
+);

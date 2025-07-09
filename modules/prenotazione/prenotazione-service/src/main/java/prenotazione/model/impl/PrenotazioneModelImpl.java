@@ -69,9 +69,9 @@ public class PrenotazioneModelImpl
 		{"groupId", Types.BIGINT}, {"companyId", Types.BIGINT},
 		{"userId", Types.BIGINT}, {"userName", Types.VARCHAR},
 		{"createDate", Types.TIMESTAMP}, {"modifiedDate", Types.TIMESTAMP},
-		{"email", Types.VARCHAR}, {"data_", Types.TIMESTAMP},
-		{"oraInizio", Types.VARCHAR}, {"oraFine", Types.VARCHAR},
-		{"postazioneId", Types.VARCHAR}
+		{"email", Types.VARCHAR}, {"data", Types.TIMESTAMP},
+		{"ora_inizio", Types.VARCHAR}, {"ora_fine", Types.VARCHAR},
+		{"postazione_id", Types.VARCHAR}
 	};
 
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP =
@@ -87,14 +87,14 @@ public class PrenotazioneModelImpl
 		TABLE_COLUMNS_MAP.put("createDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("modifiedDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("email", Types.VARCHAR);
-		TABLE_COLUMNS_MAP.put("data_", Types.TIMESTAMP);
-		TABLE_COLUMNS_MAP.put("oraInizio", Types.VARCHAR);
-		TABLE_COLUMNS_MAP.put("oraFine", Types.VARCHAR);
-		TABLE_COLUMNS_MAP.put("postazioneId", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("data", Types.TIMESTAMP);
+		TABLE_COLUMNS_MAP.put("ora_inizio", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("ora_fine", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("postazione_id", Types.VARCHAR);
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table prenotazioni (uuid_ VARCHAR(75) null,prenotazioneId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,email VARCHAR(75) null,data_ DATE null,oraInizio VARCHAR(75) null,oraFine VARCHAR(75) null,postazioneId VARCHAR(75) null)";
+		"create table prenotazioni (uuid_ VARCHAR(75) null,prenotazioneId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,email VARCHAR(75) null,data DATE null,ora_inizio VARCHAR(75) null,ora_fine VARCHAR(75) null,postazione_id VARCHAR(75) null)";
 
 	public static final String TABLE_SQL_DROP = "drop table prenotazioni";
 
@@ -702,13 +702,13 @@ public class PrenotazioneModelImpl
 		prenotazioneImpl.setModifiedDate(
 			this.<Date>getColumnOriginalValue("modifiedDate"));
 		prenotazioneImpl.setEmail(this.<String>getColumnOriginalValue("email"));
-		prenotazioneImpl.setData(this.<Date>getColumnOriginalValue("data_"));
+		prenotazioneImpl.setData(this.<Date>getColumnOriginalValue("data"));
 		prenotazioneImpl.setOraInizio(
-			this.<String>getColumnOriginalValue("oraInizio"));
+			this.<String>getColumnOriginalValue("ora_inizio"));
 		prenotazioneImpl.setOraFine(
-			this.<String>getColumnOriginalValue("oraFine"));
+			this.<String>getColumnOriginalValue("ora_fine"));
 		prenotazioneImpl.setPostazioneId(
-			this.<String>getColumnOriginalValue("postazioneId"));
+			this.<String>getColumnOriginalValue("postazione_id"));
 
 		return prenotazioneImpl;
 	}
@@ -985,10 +985,10 @@ public class PrenotazioneModelImpl
 		_columnOriginalValues.put("createDate", _createDate);
 		_columnOriginalValues.put("modifiedDate", _modifiedDate);
 		_columnOriginalValues.put("email", _email);
-		_columnOriginalValues.put("data_", _data);
-		_columnOriginalValues.put("oraInizio", _oraInizio);
-		_columnOriginalValues.put("oraFine", _oraFine);
-		_columnOriginalValues.put("postazioneId", _postazioneId);
+		_columnOriginalValues.put("data", _data);
+		_columnOriginalValues.put("ora_inizio", _oraInizio);
+		_columnOriginalValues.put("ora_fine", _oraFine);
+		_columnOriginalValues.put("postazione_id", _postazioneId);
 	}
 
 	private static final Map<String, String> _attributeNames;
@@ -997,7 +997,9 @@ public class PrenotazioneModelImpl
 		Map<String, String> attributeNames = new HashMap<>();
 
 		attributeNames.put("uuid_", "uuid");
-		attributeNames.put("data_", "data");
+		attributeNames.put("ora_inizio", "oraInizio");
+		attributeNames.put("ora_fine", "oraFine");
+		attributeNames.put("postazione_id", "postazioneId");
 
 		_attributeNames = Collections.unmodifiableMap(attributeNames);
 	}
@@ -1031,13 +1033,13 @@ public class PrenotazioneModelImpl
 
 		columnBitmasks.put("email", 256L);
 
-		columnBitmasks.put("data_", 512L);
+		columnBitmasks.put("data", 512L);
 
-		columnBitmasks.put("oraInizio", 1024L);
+		columnBitmasks.put("ora_inizio", 1024L);
 
-		columnBitmasks.put("oraFine", 2048L);
+		columnBitmasks.put("ora_fine", 2048L);
 
-		columnBitmasks.put("postazioneId", 4096L);
+		columnBitmasks.put("postazione_id", 4096L);
 
 		_columnBitmasks = Collections.unmodifiableMap(columnBitmasks);
 	}

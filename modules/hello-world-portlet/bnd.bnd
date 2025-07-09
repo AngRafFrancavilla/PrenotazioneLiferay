@@ -3,3 +3,7 @@ Bundle-SymbolicName: com.example.portlet
 Bundle-Version: 1.0.0
 Export-Package: com.example.constants
 Web-ContextPath: /hello-world
+Import-Package: \
+ prenotazione.model, \
+ prenotazione.service, \
+ *

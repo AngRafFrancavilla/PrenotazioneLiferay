@@ -1402,7 +1402,9 @@ public class PrenotazionePersistenceImpl
 		Map<String, String> dbColumnNames = new HashMap<String, String>();
 
 		dbColumnNames.put("uuid", "uuid_");
-		dbColumnNames.put("data", "data_");
+		dbColumnNames.put("oraInizio", "ora_inizio");
+		dbColumnNames.put("oraFine", "ora_fine");
+		dbColumnNames.put("postazioneId", "postazione_id");
 
 		setDBColumnNames(dbColumnNames);
 
@@ -2084,7 +2086,7 @@ public class PrenotazionePersistenceImpl
 		PrenotazionePersistenceImpl.class);
 
 	private static final Set<String> _badColumnNames = SetUtil.fromArray(
-		new String[] {"uuid", "data"});
+		new String[] {"uuid", "oraInizio", "oraFine", "postazioneId"});
 
 	@Override
 	protected FinderCache getFinderCache() {
