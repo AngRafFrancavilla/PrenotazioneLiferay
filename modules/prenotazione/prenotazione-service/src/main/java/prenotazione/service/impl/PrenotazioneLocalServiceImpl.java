@@ -1,23 +1,43 @@
-/**
- * SPDX-FileCopyrightText: (c) 2025 Liferay, Inc. https://liferay.com
- * SPDX-License-Identifier: LGPL-2.1-or-later OR LicenseRef-Liferay-DXP-EULA-2.0.0-2023-06
- */
-
 package prenotazione.service.impl;
 
 import com.liferay.portal.aop.AopService;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.Order;
+import com.liferay.portal.kernel.dao.orm.OrderFactoryUtil;
 
 import org.osgi.service.component.annotations.Component;
-
+import prenotazione.model.Prenotazione;
 import prenotazione.service.base.PrenotazioneLocalServiceBaseImpl;
 
+import java.util.List;
+
 /**
- * @author Brian Wing Shun Chan
+ * Implementazione custom del service locale Prenotazione.
  */
 @Component(
-	property = "model.class.name=prenotazione.model.Prenotazione",
-	service = AopService.class
+    property = "model.class.name=prenotazione.model.Prenotazione",
+    service = AopService.class
 )
-public class PrenotazioneLocalServiceImpl
-	extends PrenotazioneLocalServiceBaseImpl {
+public class PrenotazioneLocalServiceImpl extends PrenotazioneLocalServiceBaseImpl {
+
+    @Override
+    public List<Prenotazione> getPrenotazionesOrdered(String orderByCol, String orderByType) {
+        DynamicQuery query = DynamicQueryFactoryUtil.forClass(Prenotazione.class, getClass().getClassLoader());
+
+        Order order;
+        if ("data".equals(orderByCol)) {
+            if ("asc".equalsIgnoreCase(orderByType)) {
+                order = OrderFactoryUtil.asc("data");
+            } else {
+                order = OrderFactoryUtil.desc("data");
+            }
+        } else {
+            order = OrderFactoryUtil.asc("prenotazioneId");
+        }
+
+        query.addOrder(order);
+
+        return dynamicQuery(query);
+    }
 }

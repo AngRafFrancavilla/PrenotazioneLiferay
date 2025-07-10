@@ -314,5 +314,12 @@ public interface PrenotazioneLocalService
 	 */
 	@Indexable(type = IndexableType.REINDEX)
 	public Prenotazione updatePrenotazione(Prenotazione prenotazione);
+	   /**
+     * Recupera la lista di prenotazioni ordinate.
+     * @param orderByCol nome della colonna per ordinare (es. "data")
+     * @param orderByType "asc" o "desc"
+     * @return lista ordinata di prenotazioni
+     */
+    List<Prenotazione> getPrenotazionesOrdered(String orderByCol, String orderByType);
 
 }

@@ -8,6 +8,10 @@ package prenotazione.service;
 import com.liferay.portal.kernel.service.ServiceWrapper;
 import com.liferay.portal.kernel.service.persistence.BasePersistence;
 
+import java.util.List;
+
+import prenotazione.model.Prenotazione;
+
 /**
  * Provides a wrapper for {@link PrenotazioneLocalService}.
  *
@@ -45,6 +49,11 @@ public class PrenotazioneLocalServiceWrapper
 
 		return _prenotazioneLocalService.addPrenotazione(prenotazione);
 	}
+	@Override
+	public List<Prenotazione> getPrenotazionesOrdered(String orderByCol, String orderByType) {
+	    return _prenotazioneLocalService.getPrenotazionesOrdered(orderByCol, orderByType);
+	}
+
 
 	/**
 	 * @throws PortalException
