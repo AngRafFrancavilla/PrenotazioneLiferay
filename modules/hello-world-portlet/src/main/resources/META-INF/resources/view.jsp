@@ -45,8 +45,15 @@
     <%
       }
     %>
-
-    <!-- FORM -->
+<div class="mb-4 text-end">
+    <a href="<portlet:renderURL>
+        <portlet:param name="mvcRenderCommandName" value="/lista-prenotazioni"/>
+    </portlet:renderURL>" 
+    class="btn btn-info">
+        Visualizza Tutte le Prenotazioni
+    </a>
+</div>
+ 
     <form action="${prenotazioneActionURL}" method="post">
       <div class="mb-3">
         <label for="<portlet:namespace/>email" class="form-label">Inserisci Email</label>
@@ -77,7 +84,6 @@
     <option value="${pst.postazioneId}">${pst.nomePostazione}</option>
   </c:forEach>
 </select>
-
 
       </div>
 
