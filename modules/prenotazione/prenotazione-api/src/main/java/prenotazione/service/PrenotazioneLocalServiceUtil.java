@@ -337,6 +337,12 @@ public class PrenotazioneLocalServiceUtil {
 		return getService().getPrenotazionesCount();
 	}
 
+	public static List<Prenotazione> getPrenotazionesOrdered(
+		String orderByCol, String orderByType) {
+
+		return getService().getPrenotazionesOrdered(orderByCol, orderByType);
+	}
+
 	/**
 	 * Updates the prenotazione in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	 *

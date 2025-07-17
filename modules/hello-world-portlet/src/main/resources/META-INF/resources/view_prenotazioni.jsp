@@ -7,48 +7,89 @@
 <div class="container mt-4">
     <h2>Elenco Prenotazioni</h2>
 
-    <liferay-ui:search-container total="${prenotazioni.size()}">
-        <liferay-ui:search-container-results results="${prenotazioni}" />
-        
-        <liferay-ui:search-container-row
-            className="prenotazione.model.Prenotazione"
-            modelVar="pren"
-            keyProperty="prenotazioneId">
-            
-            <liferay-ui:search-container-column-text name="Email" value="${pren.email}" />
-            
-            <liferay-ui:search-container-column-text name="Data">
-                <fmt:formatDate value="${pren.data}" pattern="dd/MM/yyyy" />
-            </liferay-ui:search-container-column-text>
-            
-            <liferay-ui:search-container-column-text name="Ora Inizio" value="${pren.oraInizio}" />
-            
-            <liferay-ui:search-container-column-text name="Ora Fine" value="${pren.oraFine}" />
-            
-            <liferay-ui:search-container-column-text name="Postazione" value="${pren.postazioneId}" />
+    <!-- Form di ricerca -->
+    <portlet:renderURL var="searchURL">
+        <portlet:param name="mvcRenderCommandName" value="/lista-prenotazioni" />
+    </portlet:renderURL>
 
-            <!-- Colonna Azioni -->
-			<liferay-ui:search-container-column-text name="Azioni">
-                <form
-                    action="<portlet:actionURL name='/eliminaPrenotazione' />"
-                    method="post"
-                    onsubmit="return confirm('Sei sicuro di voler eliminare questa prenotazione?');">
-                    <!-- namespace sul name -->
-                    <input
-                        type="hidden"
-                        name="<portlet:namespace/>prenotazioneId"
-                        value="${pren.prenotazioneId}"
-                    />
-                    <button type="submit" class="btn btn-danger btn-sm">
-                        Elimina
-                    </button>
-                </form>
-            </liferay-ui:search-container-column-text>
-        </liferay-ui:search-container-row>
-        <liferay-ui:search-iterator />
-    </liferay-ui:search-container>
+    <form action="${searchURL}" method="post" class="mb-4">
+        <div class="row">
+            <!--ricerca per postazione -->
+            <div class="col-md-4 mb-3">
+                <label for="<portlet:namespace/>postazioneFilter">Postazione</label>
+                <select class="form-control" name="<portlet:namespace/>postazioneFilter" id="<portlet:namespace/>postazioneFilter">
+                    <option value="">Tutte le postazioni</option>
+                    <c:forEach items="${postazioni}" var="pst">
+                        <option value="${pst.postazioneId}"
+                            ${postazioneFilter eq pst.postazioneId ? 'selected' : ''}>
+                            ${pst.nomePostazione}
+                        </option>
+                    </c:forEach>
+                </select>
+            </div>
 
-    <a href="<portlet:renderURL />" class="btn btn-primary">
-        Torna alla Home
-    </a>
+            <!-- data inizio -->
+            <div class="col-md-4 mb-3">
+                <label for="<portlet:namespace/>dataFilterDa">Data DA</label>
+                <input type="date" class="form-control"
+                    name="<portlet:namespace/>dataFilterDa" id="<portlet:namespace/>dataFilterDa"
+                    value="${dataFilterDa}">
+            </div>
+
+            <!-- data fine -->
+            <div class="col-md-4 mb-3">
+                <label for="<portlet:namespace/>dataFilterA">Data A</label>
+                <input type="date" class="form-control"
+                    name="<portlet:namespace/>dataFilterA" id="<portlet:namespace/>dataFilterA"
+                    value="${dataFilterA}">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-primary">Cerca</button>
+                <a href="${searchURL}" class="btn btn-secondary">Reset</a>
+            </div>
+        </div>
+    </form>
+
+    <!-- risultati ricerc -->
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Email</th>
+                    <th>Data</th>
+                    <th>Ora Inizio</th>
+                    <th>Ora Fine</th>
+                    <th>Postazione</th>
+                </tr>
+            </thead>
+            <tbody>
+                <c:forEach items="${prenotazioni}" var="prenotazione">
+                    <tr>
+                        <td>${prenotazione.email}</td>
+                        <td>
+                            <fmt:formatDate value="${prenotazione.data}" pattern="dd/MM/yyyy"/>
+                        </td>
+                        <td>${prenotazione.oraInizio}</td>
+                        <td>${prenotazione.oraFine}</td>
+                        <td>
+                            <c:forEach items="${postazioni}" var="pst">
+                                <c:if test="${pst.postazioneId eq prenotazione.postazioneId}">
+                                    ${pst.nomePostazione}
+                                </c:if>
+                            </c:forEach>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>
+
+        <c:if test="${empty prenotazioni}">
+            <div class="alert alert-info">
+                Nessuna prenotazione trovata con i filtri selezionati.
+            </div>
+        </c:if>
+    </div>
 </div>
