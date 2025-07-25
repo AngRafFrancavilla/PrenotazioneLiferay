@@ -4,10 +4,12 @@ import com.example.constants.HelloWorldPortletKeys;
 import com.liferay.counter.kernel.service.CounterLocalService;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -19,7 +21,6 @@ import org.osgi.service.component.annotations.Reference;
 import prenotazione.model.Prenotazione;
 import prenotazione.service.PrenotazioneLocalService;
 import com.liferay.portal.kernel.servlet.SessionErrors;
-
 
 @Component(
     immediate = true,
@@ -53,6 +54,13 @@ public class PrenotazioneActionCommand implements MVCActionCommand {
         System.out.println("ID postazione: " + postazioneId);
 
         try {
+            // Validazione email - verifica se esiste nel database
+            if (!isEmailValidInDatabase(email)) {
+                SessionErrors.add(request, "email-non-corretta");
+                System.out.println("Email non trovata nel database: " + email);
+                return false;
+            }
+
             Date dataPrenotazione = _toDate(dataStr);
             Date oggi = _toDate(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
 
@@ -81,7 +89,6 @@ public class PrenotazioneActionCommand implements MVCActionCommand {
                 return false;
             }
 
-
             // Creazione e salvataggio prenotazione
             long prenotazioneId = counterLocalService.increment();
             Prenotazione prenotazione = prenotazioneLocalService.createPrenotazione(prenotazioneId);
@@ -105,6 +112,34 @@ public class PrenotazioneActionCommand implements MVCActionCommand {
         return true;
     }
 
+    /**
+     * Verifica se l'email esiste già nel database delle prenotazioni
+     */
+    private boolean isEmailValidInDatabase(String email) {
+        if (Validator.isNull(email) || email.trim().isEmpty()) {
+            return false;
+        }
+
+        try {
+            // Ottieni tutte le prenotazioni e verifica se l'email esiste
+            List<Prenotazione> prenotazioni = prenotazioneLocalService.getPrenotaziones(-1, -1);
+            
+            for (Prenotazione prenotazione : prenotazioni) {
+                if (email.trim().equalsIgnoreCase(prenotazione.getEmail().trim())) {
+                    System.out.println("Email trovata nel database: " + email);
+                    return true;
+                }
+            }
+            
+            System.out.println("Email NON trovata nel database: " + email);
+            return false;
+            
+        } catch (Exception e) {
+            System.err.println("Errore durante la verifica dell'email: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+    }
 
     private Date _toDate(String yyyyMMdd) throws ParseException {
         return new SimpleDateFormat("yyyy-MM-dd").parse(yyyyMMdd);
