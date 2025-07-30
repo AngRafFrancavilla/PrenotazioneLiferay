@@ -52,14 +52,12 @@ public class EditPrenotazioneRenderCommand implements MVCRenderCommand {
         
         try {
             Prenotazione prenotazione = prenotazioneLocalService.getPrenotazione(prenotazioneId);
-            
-            // Verifica se la prenotazione può essere modificata (entro 1 ora dall'inizio)
+
             if (!isModificabile(prenotazione)) {
                 SessionErrors.add(renderRequest, "prenotazione-non-modificabile");
                 return "/view_prenotazioni.jsp";
             }
             
-            // Carica le postazioni per la select
             List<Postazione> postazioni = postazioneLocalService.getPostaziones(-1, -1);
             
             renderRequest.setAttribute("prenotazione", prenotazione);
@@ -75,7 +73,7 @@ public class EditPrenotazioneRenderCommand implements MVCRenderCommand {
     
     private boolean isModificabile(Prenotazione prenotazione) {
         try {
-            // Combina data e ora inizio per creare il datetime completo
+          
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             
@@ -84,11 +82,9 @@ public class EditPrenotazioneRenderCommand implements MVCRenderCommand {
             
             Date dataOraInizioPren = sdf.parse(dataOraInizio);
             Date now = new Date();
-            
-            // Calcola la differenza in millisecondi
+
             long differenza = dataOraInizioPren.getTime() - now.getTime();
             
-            // Converte in ore (1 ora = 3600000 millisecondi)
             long oreRimanenti = differenza / (1000 * 60 * 60);
             
             System.out.println("Prenotazione ID: " + prenotazione.getPrenotazioneId());
@@ -96,7 +92,6 @@ public class EditPrenotazioneRenderCommand implements MVCRenderCommand {
             System.out.println("Ora attuale: " + sdf.format(now));
             System.out.println("Ore rimanenti: " + oreRimanenti);
             
-            // Modificabile se manca almeno 1 ora all'inizio
             return oreRimanenti >= 1;
             
         } catch (Exception e) {

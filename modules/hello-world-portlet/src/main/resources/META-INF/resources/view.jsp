@@ -14,6 +14,7 @@ String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Form Orari</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 
 <body class="bg-light p-4">
@@ -26,40 +27,48 @@ String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 if (SessionErrors.contains(request, "email-non-corretta")) {
 %>
 <div class="alert alert-danger" role="alert">
-    <strong>Errore!</strong> L'email inserita non è corretta o non è presente nel sistema.
+<strong>Errore!</strong> L'email inserita non è corretta o non è presente nel sistema.
 </div>
 <%
 }
 if (SessionErrors.contains(request, "data-passata")) {
 %>
 <div class="alert alert-danger" role="alert">
-    La data selezionata è già passata.
+La data selezionata è già passata.
 </div>
 <%
 }
 if (SessionErrors.contains(request, "ora-inizio-passata")) {
 %>
 <div class="alert alert-danger" role="alert">
-    L'ora di inizio deve essere uguale o successiva all'ora attuale.
+L'ora di inizio deve essere uguale o successiva all'ora attuale.
 </div>
 <%
 }
 if (SessionErrors.contains(request, "ora-fine-non-valida")) {
 %>
 <div class="alert alert-danger" role="alert">
-    L'ora di fine deve essere successiva all'ora di inizio.
+L'ora di fine deve essere successiva all'ora di inizio.
 </div>
 <%
 }
 %>
 
-<div class="mb-4 text-end">
-<a href="<portlet:renderURL>
-    <portlet:param name="mvcRenderCommandName" value="/lista-prenotazioni"/>
-</portlet:renderURL>"
-   class="btn btn-info">
-    Visualizza Tutte le Prenotazioni
-</a>
+<!-- Menu di navigazione -->
+<div class="mb-4 d-flex justify-content-end gap-2">
+    <portlet:renderURL var="prenotazioniURL">
+        <portlet:param name="mvcRenderCommandName" value="/lista-prenotazioni"/>
+    </portlet:renderURL>
+    <a href="${prenotazioniURL}" class="btn btn-info">
+        <i class="fas fa-calendar"></i> Visualizza Prenotazioni
+    </a>
+    
+    <portlet:renderURL var="statisticheURL">
+        <portlet:param name="mvcRenderCommandName" value="/user-stats"/>
+    </portlet:renderURL>
+    <a href="${statisticheURL}" class="btn btn-success">
+        <i class="fas fa-chart-line"></i> Statistiche Utenti
+    </a>
 </div>
 
 <form action="${prenotazioneActionURL}" method="post">
