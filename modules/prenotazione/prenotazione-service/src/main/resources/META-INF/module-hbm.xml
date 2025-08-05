@@ -4,6 +4,7 @@
 <hibernate-mapping auto-import="false" default-lazy="false">
 	<import class="prenotazione.model.Postazione" />
 	<import class="prenotazione.model.Prenotazione" />
+	<import class="prenotazione.model.Utente" />
 	<class name="prenotazione.model.impl.PostazioneImpl" table="postazioni">
 		<id access="com.liferay.portal.dao.orm.hibernate.MethodPropertyAccessor" column="id" name="postazioneId" type="long">
 			<generator class="assigned" />
@@ -27,5 +28,16 @@
 		<property access="com.liferay.portal.dao.orm.hibernate.MethodPropertyAccessor" column="ora_inizio" name="oraInizio" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property access="com.liferay.portal.dao.orm.hibernate.MethodPropertyAccessor" column="ora_fine" name="oraFine" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property access="com.liferay.portal.dao.orm.hibernate.MethodPropertyAccessor" column="postazione_id" name="postazioneId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="prenotazione.model.impl.UtenteImpl" table="utenti">
+		<id access="com.liferay.portal.dao.orm.hibernate.MethodPropertyAccessor" column="id_" name="id" type="long">
+			<generator class="assigned" />
+		</id>
+		<property access="com.liferay.portal.dao.orm.hibernate.MethodPropertyAccessor" name="nome" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property access="com.liferay.portal.dao.orm.hibernate.MethodPropertyAccessor" name="cognome" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property access="com.liferay.portal.dao.orm.hibernate.MethodPropertyAccessor" name="email" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property access="com.liferay.portal.dao.orm.hibernate.MethodPropertyAccessor" column="password_" name="password" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property access="com.liferay.portal.dao.orm.hibernate.MethodPropertyAccessor" column="percorso_foto" name="percorsoFoto" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property access="com.liferay.portal.dao.orm.hibernate.MethodPropertyAccessor" column="anno_assunzione" name="annoAssunzione" type="org.hibernate.type.TimestampType" />
 	</class>
 </hibernate-mapping>

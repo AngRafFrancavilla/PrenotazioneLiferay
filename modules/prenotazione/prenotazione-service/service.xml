@@ -1,49 +1,50 @@
 <?xml version="1.0"?>
-<!DOCTYPE service-builder PUBLIC
-  "-//Liferay//DTD Service Builder 7.4.0//EN"
-  "http://www.liferay.com/dtd/liferay-service-builder_7_4_0.dtd">
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.4.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_4_0.dtd">
 
-<service-builder
-    package-path="prenotazione"
-    dependency-injector="ds"
-    auto-namespace-tables="false">
+<service-builder package-path="prenotazione" dependency-injector="ds" auto-namespace-tables="false">
+    <namespace></namespace>
 
-  <namespace></namespace>
+    <!-- Entità Prenotazione esistente -->
+    <entity name="Prenotazione" table="prenotazioni" local-service="true" remote-service="true" uuid="true" data-source="prenotazioniDataSource">
+        <column name="prenotazioneId" primary="true" type="long"/>
+        <!-- campi di audit -->
+        <column name="groupId" type="long"/>
+        <column name="companyId" type="long"/>
+        <column name="userId" type="long"/>
+        <column name="userName" type="String"/>
+        <column name="createDate" type="Date"/>
+        <column name="modifiedDate" type="Date"/>
+        <!-- tuoi campi -->
+        <column name="email" type="String" />
+        <column name="data" type="Date" db-name="data"/>
+        <column name="oraInizio" type="String" db-name="ora_inizio"/>
+        <column name="oraFine" type="String" db-name="ora_fine"/>
+        <column name="postazioneId" type="String" db-name="postazione_id"/>
+    </entity>
 
-  <!-- Entità Prenotazione esistente -->
-  <entity
-      name="Prenotazione"
-      table="prenotazioni"
-      local-service="true"
-      remote-service="true"
-      uuid="true"
-      data-source="prenotazioniDataSource">
-    <column name="prenotazioneId" primary="true" type="long"/>
-    <!-- campi di audit -->
-    <column name="groupId"      type="long"/>
-    <column name="companyId"    type="long"/>
-    <column name="userId"       type="long"/>
-    <column name="userName"     type="String"/>
-    <column name="createDate"   type="Date"/>
-    <column name="modifiedDate" type="Date"/>
-    <!-- tuoi campi -->
-	<column name="email" type="String" />
-    <column name="data"        type="Date"    db-name="data"/>
-    <column name="oraInizio"   type="String"    db-name="ora_inizio"/>
-    <column name="oraFine"     type="String"    db-name="ora_fine"/>
-    <column name="postazioneId" type="String"   db-name="postazione_id"/>
-  </entity>
+    <!-- Entità Postazione esistente -->
+    <entity name="Postazione" table="postazioni" local-service="true" remote-service="false">
+        <column name="postazioneId" primary="true" type="long" db-name="id"/>
+        <column name="stanzaId" type="long" db-name="stanza_id"/>
+        <column name="nomePostazione" type="String" db-name="nome_postazione"/>
+    </entity>
 
-  <!-- Nuova entità Postazione -->
-  <entity
-      name="Postazione"
-      table="postazioni"
-      local-service="true"
-      remote-service="false">
+    <!-- Nuova entità Utente -->
+    <entity name="Utente" table="utenti" local-service="true" remote-service="true" data-source="prenotazioniDataSource">
+        <column name="id" primary="true" type="long"/>
+        <column name="nome" type="String"/>
+        <column name="cognome" type="String"/>
+        <column name="email" type="String"/>
+        <column name="password" type="String"/>
+        <column name="percorsoFoto" type="String" db-name="percorso_foto"/>
+        <column name="annoAssunzione" type="Date" db-name="anno_assunzione"/>
+        
+        <!-- Finder per email -->
+        <finder name="Email" return-type="Utente">
+            <finder-column name="email"/>
+        </finder>
+        
+    </entity>
 
-    <column name="postazioneId" primary="true" type="long" db-name="id"/>
-    <column name="stanzaId"      type="long"   db-name="stanza_id"/>
-    <column name="nomePostazione" type="String" db-name="nome_postazione"/>
-  </entity>
 
 </service-builder>

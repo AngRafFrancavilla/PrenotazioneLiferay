@@ -21,4 +21,13 @@
 		<field name="oraFine" type="String" />
 		<field name="postazioneId" type="String" />
 	</model>
+	<model name="prenotazione.model.Utente">
+		<field name="id" type="long" />
+		<field name="nome" type="String" />
+		<field name="cognome" type="String" />
+		<field name="email" type="String" />
+		<field name="password" type="String" />
+		<field name="percorsoFoto" type="String" />
+		<field name="annoAssunzione" type="Date" />
+	</model>
 </model-hints>

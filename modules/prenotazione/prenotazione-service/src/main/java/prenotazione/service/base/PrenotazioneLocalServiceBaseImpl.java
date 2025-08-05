@@ -53,6 +53,7 @@ import prenotazione.model.Prenotazione;
 import prenotazione.service.PrenotazioneLocalService;
 import prenotazione.service.persistence.PostazionePersistence;
 import prenotazione.service.persistence.PrenotazionePersistence;
+import prenotazione.service.persistence.UtentePersistence;
 
 /**
  * Provides the base implementation for the prenotazione local service.
@@ -584,6 +585,9 @@ public abstract class PrenotazioneLocalServiceBaseImpl
 
 	@Reference
 	protected PrenotazionePersistence prenotazionePersistence;
+
+	@Reference
+	protected UtentePersistence utentePersistence;
 
 	@Reference
 	protected com.liferay.counter.kernel.service.CounterLocalService
